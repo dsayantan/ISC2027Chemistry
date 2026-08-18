@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISC Chemistry Practice</title>
+<style>
+/* Shared design tokens — keep in step with build_chem_drill.py in src/. */
+:root{
+  --bg:#EFF2F0; --surface:#FFFFFF; --surface-2:#F7F9F8;
+  --ink:#16211E; --muted:#5C6B67; --rule:#D3DBD8; --rule-strong:#9FAEA9;
+  --accent:#0F6E63; --accent-soft:#DDEEEB; --accent-ink:#0B4F47;
+  --shadow:0 1px 2px rgba(22,33,30,.05), 0 8px 24px -18px rgba(22,33,30,.35);
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono","JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
+    --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
+    --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
+  --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
+  --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.6;
+  display:flex; flex-direction:column; min-height:100vh;
+}
+a{color:inherit}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+sub,sup{line-height:0; font-size:74%}
+sup{vertical-align:.45em} sub{vertical-align:-.22em}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface)}
+.masthead .inner{
+  max-width:56rem; margin:0 auto; padding:2.6rem 1.25rem 2rem;
+  display:flex; flex-direction:column; gap:.7rem; position:relative;
+}
+.eyebrow{
+  font-family:var(--sans); font-size:.7rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
+}
+h1{
+  font-family:var(--serif); font-weight:600; font-size:clamp(2rem,5vw,2.8rem);
+  line-height:1.1; margin:0; letter-spacing:-.014em; text-wrap:balance;
+}
+.standfirst{margin:0; color:var(--muted); max-width:60ch; font-size:1.02rem}
+.themeBtn{
+  position:absolute; top:2.6rem; right:1.25rem;
+  font-family:var(--sans); font-size:.78rem; font-weight:550;
+  background:var(--surface); border:1px solid var(--rule); border-radius:2px;
+  padding:.38rem .8rem; color:var(--muted); transition:border-color .15s, color .15s;
+}
+.themeBtn:hover{border-color:var(--rule-strong); color:var(--ink)}
+
+/* ---------- practice sets ---------- */
+main{flex:1 0 auto; max-width:56rem; margin:0 auto; padding:2.2rem 1.25rem 1rem; width:100%}
+.section-label{
+  font-family:var(--sans); font-size:.7rem; font-weight:600; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted);
+  display:flex; align-items:center; gap:.8rem; margin-bottom:1rem;
+}
+.section-label::after{content:""; flex:1 1 auto; height:1px; background:var(--rule)}
+
+.sets{display:flex; flex-direction:column; gap:1rem; list-style:none; margin:0; padding:0}
+
+.set{
+  display:block; text-decoration:none;
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  box-shadow:var(--shadow); padding:1.4rem 1.5rem 1.35rem;
+  transition:border-color .16s, transform .16s;
+}
+.set:hover{border-color:var(--accent); transform:translateY(-1px)}
+.set .kicker{
+  font-family:var(--sans); font-size:.68rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.45rem;
+}
+.set h2{
+  font-family:var(--serif); font-weight:600; font-size:1.45rem; line-height:1.2;
+  margin:0 0 .5rem; letter-spacing:-.01em;
+  display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap;
+}
+.set h2 .go{
+  font-family:var(--sans); font-size:.78rem; font-weight:600; color:var(--accent);
+  letter-spacing:.02em; transition:transform .16s;
+}
+.set:hover h2 .go{transform:translateX(3px)}
+.set p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
+.set .stats{
+  font-family:var(--sans); font-size:.78rem; color:var(--muted);
+  margin:.85rem 0 0; padding:.7rem 0 0; border-top:1px solid var(--rule);
+  display:flex; flex-wrap:wrap; gap:.4rem .5rem; align-items:center;
+}
+.set .stats b{
+  font-variant-numeric:tabular-nums; font-weight:650; color:var(--ink); margin-right:.15rem;
+}
+.set .stats .sep{color:var(--rule-strong)}
+.set .chips{display:flex; flex-wrap:wrap; gap:.35rem; margin:.7rem 0 0}
+.set .chip{
+  font-family:var(--sans); font-size:.72rem; color:var(--accent-ink);
+  background:var(--accent-soft); border:1px solid var(--accent-soft);
+  border-radius:2px; padding:.16rem .45rem;
+}
+.set .chip b{font-variant-numeric:tabular-nums; font-weight:650}
+
+/* ---------- footer ---------- */
+footer{
+  max-width:56rem; margin:0 auto; padding:2.4rem 1.25rem 3rem; width:100%;
+  font-family:var(--sans); font-size:.78rem; color:var(--muted); line-height:1.65;
+}
+footer .rule{height:1px; background:var(--rule); margin-bottom:1.1rem}
+footer h3{
+  font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); margin:0 0 .5rem;
+}
+footer p{margin:0 0 .9rem; max-width:70ch}
+footer code{
+  font-family:var(--mono); font-size:.9em; background:var(--surface-2);
+  border:1px solid var(--rule); border-radius:3px; padding:.08em .34em;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+@media (max-width:560px){
+  body{font-size:16px}
+  .masthead .inner{padding-top:3.6rem}
+  .themeBtn{top:1.1rem}
+  .set{padding:1.15rem 1.1rem}
+}
+</style>
+<script>
+/* Apply the remembered theme before first paint, so there is no flash of the
+   wrong palette. Shares its storage key with the drill pages. */
+try {
+  var t = localStorage.getItem('isc-chem-theme');
+  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+} catch (e) {}
+</script>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <button class="themeBtn" id="themeBtn" type="button">Dark</button>
+    <div class="eyebrow">ISC Class 12 &middot; Paper 1 (Theory)</div>
+    <h1>Chemistry Practice</h1>
+    <p class="standfirst">Self-marking question sets built from the CISCE board papers, improvement papers and specimen papers. Answer at your own pace &mdash; each question shows the worked solution as soon as you choose, whether you were right or wrong.</p>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">Practice sets</div>
+
+  <ul class="sets">
+
+    <li>
+      <a class="set" href="Kinetics-Alcohols-Phenols-Ethers-MCQ.html">
+        <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
+        <h2>Kinetics, Alcohols, Phenols &amp; Ethers Drill <span class="go">Start &rarr;</span></h2>
+        <p>Rate laws and order from initial-rate data, first-order and half-life problems, the Arrhenius equation, collision theory; then acidity and boiling-point trends, named reactions, distinguishing tests, structure elucidation and the ether-cleavage rules. Many of these began as subjective 2 and 3 mark questions, so several options run to a paragraph &mdash; what you pick between is the reasoning, not just a number.</p>
+        <div class="chips">
+          <span class="chip"><b>6</b> Rate &amp; rate law</span>
+          <span class="chip"><b>6</b> Order &amp; units of k</span>
+          <span class="chip"><b>8</b> First order &amp; half-life</span>
+          <span class="chip"><b>7</b> Arrhenius &amp; E<sub>a</sub></span>
+          <span class="chip"><b>6</b> Kinetics theory</span>
+          <span class="chip"><b>7</b> Structure &amp; properties</span>
+          <span class="chip"><b>7</b> Acidity &amp; trends</span>
+          <span class="chip"><b>10</b> Reactions &amp; conversions</span>
+          <span class="chip"><b>6</b> Tests &amp; identification</span>
+          <span class="chip"><b>5</b> Mechanisms &amp; ethers</span>
+        </div>
+        <p class="stats">
+          <span><b>68</b> questions</span> <span class="sep">&middot;</span>
+          <span>no time limit</span> <span class="sep">&middot;</span>
+          <span>shuffles on re-attempt</span> <span class="sep">&middot;</span>
+          <span>ISC 2018&ndash;2026, specimen 2018 &amp; 2022&ndash;2027, Heritage</span>
+        </p>
+      </a>
+    </li>
+
+    <!-- ============================================================
+         TO ADD ANOTHER SET: copy the <li> block below, drop it in
+         above this comment, and fill in the five places marked.
+         Delete the surrounding comment markers to make it live.
+
+    <li>
+      <a class="set" href="FILENAME.html">
+        <span class="kicker">Chapter &middot; CHAPTER NAME</span>
+        <h2>SET TITLE <span class="go">Start &rarr;</span></h2>
+        <p>One or two sentences on what the set covers.</p>
+        <div class="chips">
+          <span class="chip"><b>12</b> Topic one</span>
+          <span class="chip"><b>8</b> Topic two</span>
+        </div>
+        <p class="stats">
+          <span><b>20</b> questions</span> <span class="sep">&middot;</span>
+          <span>no time limit</span> <span class="sep">&middot;</span>
+          <span>WHICH PAPERS</span>
+        </p>
+      </a>
+    </li>
+
+         ============================================================ -->
+
+  </ul>
+</main>
+
+<footer>
+  <div class="rule"></div>
+  <h3>About these sets</h3>
+  <p>Questions are drawn from the ISC Chemistry Paper 1 board papers for 2018&ndash;2026, the 2025 Improvement paper, the CISCE specimen papers for 2018 and 2022&ndash;2027, and Heritage School pre-board and first-term papers. Every numerical answer was recomputed independently rather than copied across.</p>
+  <p>Check the current syllabus in <code>Syllabus/</code> before working through the older papers &mdash; it decides what is still examinable, and some topics in the 2018&ndash;2020 papers have since been dropped. More sets will be added to this page.</p>
+</footer>
+
+<script>
+/* Remember the reader's light / dark choice across this page and the drills.
+   The stored value is applied by the small script in <head>. */
+var KEY = 'isc-chem-theme';
+function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+
+function isDark(){
+  var set = document.documentElement.getAttribute('data-theme');
+  if (set) return set === 'dark';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+var btn = document.getElementById('themeBtn');
+function syncBtn(){ btn.textContent = isDark() ? 'Light' : 'Dark'; }
+btn.addEventListener('click', function(){
+  var next = isDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  save(next);
+  syncBtn();
+});
+syncBtn();
+</script>
+</body>
+</html>
