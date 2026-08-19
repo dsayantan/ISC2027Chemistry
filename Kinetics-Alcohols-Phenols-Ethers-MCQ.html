@@ -67,6 +67,10 @@ h1{
   line-height:1.12; margin:0; text-wrap:balance; letter-spacing:-.012em;
 }
 .standfirst{margin:0; color:var(--muted); max-width:52ch; font-size:1.02rem}
+h1 .paper{
+  font-family:var(--sans); font-size:.85rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--muted);
+}
 .sources{
   font-family:var(--sans); font-size:.78rem; color:var(--muted);
   border-top:1px solid var(--rule); padding-top:.85rem; margin-top:.35rem;
@@ -207,6 +211,32 @@ table.data td{font-variant-numeric:tabular-nums}
 .why .verdict.hit{color:var(--ok)}
 .why .verdict.miss{color:var(--bad)}
 .why p{margin:0; font-size:.95rem; line-height:1.58}
+.why .owhy{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:.42rem;
+}
+.why .owhy li{
+  display:grid; grid-template-columns:1.35rem 1fr; gap:.55rem;
+  font-size:.92rem; line-height:1.52; color:var(--muted);
+}
+.why .owhy .k{
+  font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.04em;
+  text-transform:uppercase; text-align:center; color:var(--muted);
+  border:1px solid var(--rule); border-radius:2px; height:1.15rem; line-height:1.05rem;
+}
+.why .owhy li.is-correct{color:var(--ink)}
+.why .owhy li.is-correct .k{
+  color:var(--ok); border-color:var(--ok); background:var(--ok-soft); font-weight:800;
+}
+.why .owhy li.is-chosen .k{color:var(--bad); border-color:var(--bad); background:var(--bad-soft)}
+.why .owhy li.is-correct.is-chosen .k{
+  color:var(--ok); border-color:var(--ok); background:var(--ok-soft);
+}
+.why .owhy b.tag{
+  font-family:var(--sans); font-size:.66rem; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ok); margin-right:.3rem;
+}
+.why .owhy li:not(.is-correct) b.tag{color:var(--bad)}
 .why code{white-space:normal; overflow-wrap:anywhere}
 .why .steps{
   margin:0; padding:.1rem 0; list-style:none; display:flex; flex-direction:column; gap:.25rem;
@@ -284,13 +314,11 @@ try {
   <div class="inner">
     <a class="back" href="index.html">&larr; ISC Chemistry Practice</a>
     <div class="eyebrow">ISC Chemistry &middot; Paper 1 (Theory)</div>
-    <h1>Kinetics, Alcohols, Phenols &amp; Ethers</h1>
+    <h1>Kinetics, Alcohols, Phenols &amp; Ethers<br><span class="paper">Paper 1</span></h1>
     <p class="standfirst">68 multiple-choice questions across both chapters. Pick an answer
     and the worked solution appears straight away &mdash; whether you were right or wrong.
     There is no time limit and nothing is saved, so you can take it as often as you like.</p>
-    <p class="sources">Built from the ISC Chemistry Paper 1 board papers
-    for 2018&ndash;2026, the 2025 Improvement paper, the CISCE specimen papers for
-    2018 and 2022&ndash;2027, and Heritage School papers. Many of these began as subjective
+    <p class="sources">Built from the ISC Chemistry Paper 1 board papers for 2018&ndash;2026, the 2025 Improvement paper, the CISCE specimen papers for 2018 and 2022&ndash;2027, and Heritage School papers. Many of these began as subjective
     2 and 3 mark questions, so several options are a paragraph long &mdash; what you are
     choosing between is the <i>reasoning</i>, not just a number. Syllabus units 3 and 7.</p>
   </div>
@@ -1492,6 +1520,12 @@ function build(){
           +   (q.steps ? '<ul class="steps">'
                 + q.steps.map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('')
                 + '</ul>' : '')
+          +   (q.ow ? '<ul class="owhy">'
+                + opts[qi].map(function(oj, slot){
+                    return '<li data-oj="' + oj + '"><span class="k">' + KEYS[slot]
+                         + '</span><span>' + fmt(q.ow[oj]) + '</span></li>';
+                  }).join('')
+                + '</ul>' : '')
           +   '<p>' + fmt(q.e) + '</p>'
           + '</div>';
 
@@ -1534,6 +1568,21 @@ function onPick(ev){
     verdict.textContent = 'Not quite — the answer is (' + KEYS[right] + ')';
     verdict.className = 'verdict miss';
   }
+  /* Label each rationale: which option is right, and which one you took. */
+  why.querySelectorAll('.owhy li').forEach(function(li){
+    var oj = +li.dataset.oj;
+    if (oj === q.a){
+      li.classList.add('is-correct');
+      li.querySelector('span:last-child').insertAdjacentHTML(
+        'afterbegin', '<b class="tag">Correct</b>');
+    }
+    if (oj === chosen){
+      li.classList.add('is-chosen');
+      if (oj !== q.a) li.querySelector('span:last-child').insertAdjacentHTML(
+        'afterbegin', '<b class="tag">You chose this</b>');
+    }
+  });
+
   why.hidden = false;
   refresh();
 }
