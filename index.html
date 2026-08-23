@@ -75,6 +75,7 @@ main{flex:1 0 auto; max-width:56rem; margin:0 auto; padding:2.2rem 1.25rem 1rem;
 }
 .section-label::after{content:""; flex:1 1 auto; height:1px; background:var(--rule)}
 
+.lead{margin:0 0 1.3rem; color:var(--muted); font-size:.98rem; max-width:66ch}
 .sets{display:flex; flex-direction:column; gap:1rem; list-style:none; margin:0; padding:0}
 
 .set{
@@ -99,22 +100,56 @@ main{flex:1 0 auto; max-width:56rem; margin:0 auto; padding:2.2rem 1.25rem 1rem;
 }
 .set:hover h2 .go{transform:translateX(3px)}
 .set p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
-.set .stats{
+.set .stats, .paperblock .stats{
   font-family:var(--sans); font-size:.78rem; color:var(--muted);
   margin:.85rem 0 0; padding:.7rem 0 0; border-top:1px solid var(--rule);
   display:flex; flex-wrap:wrap; gap:.4rem .5rem; align-items:center;
 }
-.set .stats b{
+.set .stats b, .paperblock .stats b{
   font-variant-numeric:tabular-nums; font-weight:650; color:var(--ink); margin-right:.15rem;
 }
-.set .stats .sep{color:var(--rule-strong)}
-.set .chips{display:flex; flex-wrap:wrap; gap:.35rem; margin:.7rem 0 0}
-.set .chip{
+.set .stats .sep, .paperblock .stats .sep{color:var(--rule-strong)}
+.set .chips, .paperblock .chips{display:flex; flex-wrap:wrap; gap:.35rem; margin:.7rem 0 0}
+.set .chip, .paperblock .chip{
   font-family:var(--sans); font-size:.72rem; color:var(--accent-ink);
   background:var(--accent-soft); border:1px solid var(--accent-soft);
   border-radius:2px; padding:.16rem .45rem;
 }
-.set .chip b{font-variant-numeric:tabular-nums; font-weight:650}
+.set .chip b, .paperblock .chip b{font-variant-numeric:tabular-nums; font-weight:650}
+
+/* ---------- a paper, with its two ways in ---------- */
+.paperblock{
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  box-shadow:var(--shadow); padding:1.4rem 1.5rem 1.35rem;
+}
+.paperblock .kicker{
+  font-family:var(--sans); font-size:.68rem; font-weight:600; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.45rem;
+}
+.paperblock h2{
+  font-family:var(--serif); font-weight:600; font-size:1.45rem; line-height:1.2;
+  margin:0 0 .5rem; letter-spacing:-.01em;
+}
+.paperblock > p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
+.ways{display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem}
+.way{
+  display:flex; flex-direction:column; gap:.28rem; text-decoration:none;
+  border:1px solid var(--rule); border-radius:3px; padding:.85rem .95rem .8rem;
+  background:var(--surface-2); transition:border-color .16s, transform .16s;
+}
+.way:hover{border-color:var(--accent); transform:translateY(-1px)}
+.way .wk{
+  font-family:var(--sans); font-size:.64rem; font-weight:700; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--accent);
+}
+.way b{font-family:var(--serif); font-size:1.05rem; font-weight:600; line-height:1.25}
+.way .wd{font-size:.86rem; color:var(--muted); line-height:1.45}
+.way .go{
+  font-family:var(--sans); font-size:.76rem; font-weight:600; color:var(--accent);
+  margin-top:.25rem; transition:transform .16s;
+}
+.way:hover .go{transform:translateX(3px)}
+@media (max-width:560px){ .ways{grid-template-columns:1fr} }
 
 /* ---------- footer ---------- */
 footer{
@@ -155,21 +190,24 @@ try {
     <button class="themeBtn" id="themeBtn" type="button">Dark</button>
     <div class="eyebrow">ISC Class 12 &middot; Paper 1 (Theory)</div>
     <h1>Chemistry Practice</h1>
-    <p class="standfirst">Self-marking question sets built from the CISCE board papers, improvement papers and specimen papers. Answer at your own pace &mdash; each question shows the worked solution as soon as you choose, whether you were right or wrong.</p>
+    <p class="standfirst">Question sets built from the CISCE board papers, improvement papers and specimen papers. Each paper comes two ways: a <b>Learn</b> version where every question will show you its worked solution, and a <b>timed test</b> over the same questions that marks itself when you submit.</p>
   </div>
 </header>
 
 <main>
   <div class="section-label">Practice sets</div>
 
+  <p class="lead">Two papers over Chemical Kinetics and Alcohols, Phenols &amp; Ethers. Each
+  comes in two versions built from <b>the same questions in the same order</b> &mdash; one to
+  learn from with the answers on show, one to sit against the clock.</p>
+
   <ul class="sets">
 
-    <li>
-      <a class="set" href="Kinetics-Alcohols-Phenols-Ethers-MCQ.html">
-        <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
-        <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 1 <span class="go">Start &rarr;</span></h2>
-        <p>Rate laws and order from initial-rate data, first-order and half-life problems, the Arrhenius equation, collision theory; then acidity and boiling-point trends, named reactions, distinguishing tests, structure elucidation and the ether-cleavage rules. Many of these began as subjective 2 and 3 mark questions, so several options run to a paragraph &mdash; what you pick between is the reasoning, not just a number.</p>
-        <div class="chips">
+    <li class="paperblock">
+      <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
+      <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 1</h2>
+      <p>Rate laws and order from initial-rate data, first-order and half-life problems, the Arrhenius equation, collision theory; then acidity and boiling-point trends, named reactions, distinguishing tests, structure elucidation and the ether-cleavage rules. Many of these began as subjective 2 and 3 mark questions, so several options run to a paragraph &mdash; what you pick between is the reasoning, not just a number.</p>
+      <div class="chips">
           <span class="chip"><b>6</b> Rate &amp; rate law</span>
           <span class="chip"><b>6</b> Order &amp; units of k</span>
           <span class="chip"><b>8</b> First order &amp; half-life</span>
@@ -180,22 +218,37 @@ try {
           <span class="chip"><b>10</b> Reactions &amp; conversions</span>
           <span class="chip"><b>6</b> Tests &amp; identification</span>
           <span class="chip"><b>5</b> Mechanisms &amp; ethers</span>
-        </div>
-        <p class="stats">
-          <span><b>68</b> questions</span> <span class="sep">&middot;</span>
-          <span>no time limit</span> <span class="sep">&middot;</span>
-          <span>shuffles on re-attempt</span> <span class="sep">&middot;</span>
-          <span>ISC 2018&ndash;2026, specimen 2018 &amp; 2022&ndash;2027, Heritage</span>
-        </p>
-      </a>
+      </div>
+      <p class="stats">
+        <span><b>68</b> questions</span> <span class="sep">&middot;</span>
+        <span>same questions in both versions</span> <span class="sep">&middot;</span>
+        <span>ISC 2018&ndash;2026, specimen 2018 &amp; 2022&ndash;2027, Heritage</span>
+      </p>
+      <div class="ways">
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-1-Learn.html">
+          <span class="wk">Version 1 &middot; Learn</span>
+          <b>Study with the answers</b>
+          <span class="wd">All 68 questions with a <i>Show answer</i> on each, and a
+            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
+            clock, no score &mdash; this one is for learning.</span>
+          <span class="go">Open &rarr;</span>
+        </a>
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-1-Test.html">
+          <span class="wk">Version 2 &middot; Timed test</span>
+          <b>90 minutes, 68 marks</b>
+          <span class="wd">The same 68 questions sat as a paper. Change your answers
+            freely; nothing is marked until you submit, and it submits itself when the
+            time is up. The marked paper doubles as a review.</span>
+          <span class="go">Start &rarr;</span>
+        </a>
+      </div>
     </li>
 
-    <li>
-      <a class="set" href="Kinetics-Alcohols-Phenols-Ethers-MCQ-Paper-2.html">
-        <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
-        <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 2 <span class="go">Start &rarr;</span></h2>
-        <p>A second set over the same two chapters, sharing no question with Paper&nbsp;1. Built around CISCE&rsquo;s <i>Competency-Focused Practice Questions</i> booklet, so the emphasis falls on application and reasoning rather than recall &mdash; assertion&ndash;reason items, data tables, graph reading and multi-step conversions. <b>Every option is explained</b>, not just the right one: after you answer, each of the four gets a line saying why it is or is not the answer, with your choice and the correct one marked.</p>
-        <div class="chips">
+    <li class="paperblock">
+      <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
+      <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 2</h2>
+      <p>A second set over the same two chapters, sharing no question with Paper&nbsp;1. Built around CISCE&rsquo;s <i>Competency-Focused Practice Questions</i> booklet, so the emphasis falls on application and reasoning rather than recall &mdash; assertion&ndash;reason items, data tables, graph reading and multi-step conversions. <b>Every option is explained</b>, not just the right one.</p>
+      <div class="chips">
           <span class="chip"><b>6</b> Rate &amp; rate law</span>
           <span class="chip"><b>6</b> Order &amp; units of k</span>
           <span class="chip"><b>8</b> First order &amp; half-life</span>
@@ -206,38 +259,37 @@ try {
           <span class="chip"><b>8</b> Reactions &amp; conversions</span>
           <span class="chip"><b>5</b> Tests &amp; identification</span>
           <span class="chip"><b>5</b> Mechanisms &amp; ethers</span>
-        </div>
-        <p class="stats">
-          <span><b>61</b> questions</span> <span class="sep">&middot;</span>
-          <span>every option explained</span> <span class="sep">&middot;</span>
-          <span>shuffles on re-attempt</span> <span class="sep">&middot;</span>
-          <span>CISCE competency booklet, ISC 2018&ndash;2026</span>
-        </p>
-      </a>
+      </div>
+      <p class="stats">
+        <span><b>61</b> questions</span> <span class="sep">&middot;</span>
+        <span>same questions in both versions</span> <span class="sep">&middot;</span>
+        <span>CISCE competency booklet, ISC 2018&ndash;2026</span>
+      </p>
+      <div class="ways">
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-2-Learn.html">
+          <span class="wk">Version 1 &middot; Learn</span>
+          <b>Study with the answers</b>
+          <span class="wd">All 61 questions with a <i>Show answer</i> on each, and a
+            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
+            clock, no score &mdash; this one is for learning.</span>
+          <span class="go">Open &rarr;</span>
+        </a>
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-2-Test.html">
+          <span class="wk">Version 2 &middot; Timed test</span>
+          <b>90 minutes, 61 marks</b>
+          <span class="wd">The same 61 questions sat as a paper. Change your answers
+            freely; nothing is marked until you submit, and it submits itself when the
+            time is up. The marked paper doubles as a review.</span>
+          <span class="go">Start &rarr;</span>
+        </a>
+      </div>
     </li>
 
     <!-- ============================================================
-         TO ADD ANOTHER SET: copy the <li> block below, drop it in
-         above this comment, and fill in the five places marked.
-         Delete the surrounding comment markers to make it live.
-
-    <li>
-      <a class="set" href="FILENAME.html">
-        <span class="kicker">Chapter &middot; CHAPTER NAME</span>
-        <h2>SET TITLE <span class="go">Start &rarr;</span></h2>
-        <p>One or two sentences on what the set covers.</p>
-        <div class="chips">
-          <span class="chip"><b>12</b> Topic one</span>
-          <span class="chip"><b>8</b> Topic two</span>
-        </div>
-        <p class="stats">
-          <span><b>20</b> questions</span> <span class="sep">&middot;</span>
-          <span>no time limit</span> <span class="sep">&middot;</span>
-          <span>WHICH PAPERS</span>
-        </p>
-      </a>
-    </li>
-
+         TO ADD ANOTHER PAPER: copy one <li class="paperblock"> above,
+         change the paper number in the two hrefs, the heading, the
+         description, the chips and the question and minute counts.
+         Both pages are generated by src/build_chem_drill.py.
          ============================================================ -->
 
   </ul>
