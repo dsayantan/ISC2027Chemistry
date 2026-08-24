@@ -131,6 +131,11 @@ main{flex:1 0 auto; max-width:56rem; margin:0 auto; padding:2.2rem 1.25rem 1rem;
   margin:0 0 .5rem; letter-spacing:-.01em;
 }
 .paperblock > p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
+.paperblock.featured{border-color:var(--accent); border-left:3px solid var(--accent)}
+.paperblock.featured h2::after{content:'ALL SOURCES'; font-family:var(--sans);
+  font-size:.6rem; font-weight:700; letter-spacing:.12em; color:var(--accent);
+  background:var(--accent-soft); border-radius:2px; padding:.15rem .4rem;
+  margin-left:.5rem; vertical-align:.28rem}
 .ways{display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem}
 .way{
   display:flex; flex-direction:column; gap:.28rem; text-decoration:none;
@@ -197,11 +202,61 @@ try {
 <main>
   <div class="section-label">Practice sets</div>
 
-  <p class="lead">Two papers over Chemical Kinetics and Alcohols, Phenols &amp; Ethers. Each
+  <p class="lead">Three papers over Chemical Kinetics and Alcohols, Phenols &amp; Ethers. Each
   comes in two versions built from <b>the same questions in the same order</b> &mdash; one to
-  learn from with the answers on show, one to sit against the clock.</p>
+  learn from with the answers on show, one to sit against the clock. <b>Paper 3 is the complete
+  bank</b>, drawn from all six sources; Papers 1 and 2 are shorter subsets of it, useful when
+  you want a sitting you can finish in an hour and a half.</p>
 
   <ul class="sets">
+
+    <li class="paperblock featured">
+      <span class="kicker">Everything &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
+      <h2>Complete MCQ bank &mdash; Paper 3</h2>
+      <p>Every 1-mark question in the collection, gathered into one set: the <b>NCERT</b>
+      textbook (worked examples, intext questions and exercises), the <b>NCERT Exemplar</b>,
+      the <b>ISC board papers</b> 2018&ndash;2026 and the 2025 Improvement paper, the
+      <b>ISC specimen papers</b>, CISCE&rsquo;s <b>competency booklet</b>, and the
+      <b>Heritage School</b> papers. It contains all of Paper&nbsp;1 and Paper&nbsp;2 with the
+      NCERT and Exemplar material added, so it is the one to work through if you want
+      complete coverage rather than a shorter sitting.</p>
+      <div class="chips">
+          <span class="chip"><b>20</b> Rate &amp; rate law</span>
+          <span class="chip"><b>21</b> Order &amp; units of k</span>
+          <span class="chip"><b>23</b> First order &amp; half-life</span>
+          <span class="chip"><b>18</b> Arrhenius &amp; E<sub>a</sub></span>
+          <span class="chip"><b>29</b> Kinetics theory</span>
+          <span class="chip"><b>27</b> Structure &amp; properties</span>
+          <span class="chip"><b>21</b> Acidity &amp; trends</span>
+          <span class="chip"><b>32</b> Reactions &amp; conversions</span>
+          <span class="chip"><b>14</b> Tests &amp; identification</span>
+          <span class="chip"><b>13</b> Mechanisms &amp; ethers</span>
+      </div>
+      <p class="stats">
+        <span><b>218</b> questions</span> <span class="sep">&middot;</span>
+        <span>111 kinetics, 107 organic</span> <span class="sep">&middot;</span>
+        <span>same questions in both versions</span> <span class="sep">&middot;</span>
+        <span>NCERT, Exemplar, ISC, specimen, competency, Heritage</span>
+      </p>
+      <div class="ways">
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-3-Complete-Learn.html">
+          <span class="wk">Version 1 &middot; Learn</span>
+          <b>Study with the answers</b>
+          <span class="wd">All 218 questions with a <i>Show answer</i> on each, and a
+            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
+            clock, no score &mdash; this one is for learning.</span>
+          <span class="go">Open &rarr;</span>
+        </a>
+        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-3-Complete-Test.html">
+          <span class="wk">Version 2 &middot; Timed test</span>
+          <b>210 minutes, 218 marks</b>
+          <span class="wd">The same 218 questions sat as a paper &mdash; one minute each,
+            rounded to the nearest half hour. Nothing is marked until you submit, and the
+            marked paper doubles as a review.</span>
+          <span class="go">Start &rarr;</span>
+        </a>
+      </div>
+    </li>
 
     <li class="paperblock">
       <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
