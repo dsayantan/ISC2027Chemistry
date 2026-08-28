@@ -90,6 +90,7 @@ main{max-width:56rem;margin:0 auto;padding:2rem 1.25rem 1rem;width:100%;flex:1 0
 
 /* ---------- the study card ---------- */
 .sets{display:flex;flex-direction:column;gap:1rem;list-style:none;margin:0;padding:0}
+.sets + .section-label{margin-top:2.6rem}
 .paperblock{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
   box-shadow:var(--shadow);padding:1.4rem 1.5rem 1.35rem}
 .paperblock.featured{border-color:var(--accent);border-left:3px solid var(--accent)}
@@ -278,28 +279,53 @@ footer code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
       </div>
     </li>
 
-    <li class="paperblock">
-      <span class="kicker">Notes &middot; Unit 7</span>
-      <h2>Alcohols, Phenols &amp; Ethers &mdash; the concepts</h2>
-      <p>A companion to chapter 6 of the deck: the ideas behind the organic questions,
-      explained with diagrams rather than lists, ending in a ten-minute recall table.</p>
-      <div class="ways">
-        <a class="way" href="Alcohols-Phenols-Ethers-Revision.html">
-          <span class="wk">Read &middot; no clock</span>
-          <b>Hydrogen bonding, acidity, carbocations, ethers</b>
-          <span class="wd">Why an alcohol boils above its isomeric ether, why phenoxide
-          makes phenol an acid, what decides S<sub>N</sub>1 against S<sub>N</sub>2, and
-          which fragment of an ether keeps the iodine.</span>
-          <span class="go">Open &rarr;</span>
-        </a>
-      </div>
-    </li>
 
     <!-- ============================================================
          TO ADD ANOTHER STUDY PAGE: copy one <li class="paperblock">
          above, change the heading, the description and the href.
          Drop "featured" unless it should carry the accent border.
          ============================================================ -->
+  </ul>
+
+  <div class="section-label">Sit a paper</div>
+
+  <p class="lead">A timed paper to sit once you have worked through the decks. Unlike
+  them it does not let you dip in and out &mdash; it locks the moment you start, and
+  marks itself the moment you stop.</p>
+
+  <ul class="sets">
+    <li class="paperblock">
+      <span class="kicker">Timed paper &middot; Physical Chemistry</span>
+      <h2>Physical Chemistry Test</h2>
+      <p>Solutions, Electrochemistry and Chemical Kinetics &mdash; the three Physical
+      Chemistry chapters of the First Term, set as one paper in the style of Section A
+      of the board paper.</p>
+      <p class="stats">
+        <span><b>40</b> questions</span> <span class="sep">&middot;</span>
+        <span><b>1</b> mark each</span> <span class="sep">&middot;</span>
+        <span><b>40</b> marks</span> <span class="sep">&middot;</span>
+        <span><b>2</b> hours</span> <span class="sep">&middot;</span>
+        <span>no negative marking</span>
+      </p>
+      <div class="chips">
+        <span class="chip">Solutions <b>14</b></span>
+        <span class="chip">Electrochemistry <b>14</b></span>
+        <span class="chip">Chemical Kinetics <b>12</b></span>
+      </div>
+      <div class="ways">
+        <a class="way" href="Physical-Chemistry-Test.html">
+          <span class="wk">Sit the paper &middot; 2 hours on the clock</span>
+          <b>40 marks, marked the moment you submit</b>
+          <span class="wd">Your marks, a chapter-by-chapter breakdown and a worked
+          explanation for every question, showing your answer against the correct
+          one. Nothing is marked until you submit.</span>
+          <span class="go">Start &rarr;</span>
+        </a>
+      </div>
+      <p class="caveat"><b>It locks once you start.</b> Closing the tab, reloading or
+      navigating away submits the paper with the answers you have given so far, and
+      there is no way back into it. Begin only when you have two clear hours.</p>
+    </li>
   </ul>
 </main>
 
