@@ -1,382 +1,336 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ISC Chemistry Practice</title>
+<title>ISC Chemistry &#8212; Class 12</title>
+<!--
+  Hand-maintained landing page. It carries two things and nothing else: the
+  First Term syllabus, and the revision deck built from it.
+
+  The syllabus below is transcribed from
+  Competency/2026-27-CL12-Chemistry Syllabus .pdf, the school's own First Term /
+  Second Term split for the 2026-27 session. If that file is replaced, update the
+  three groups here to match.
+
+  The revision deck is generated -- rebuild with
+      cd src && python3 build_ft_deck.py
+  A commented-out template for adding a second study page sits near the bottom.
+-->
 <style>
-/* Shared design tokens — keep in step with build_chem_drill.py in src/. */
 :root{
-  --bg:#EFF2F0; --surface:#FFFFFF; --surface-2:#F7F9F8;
+  --bg:#EFF2F0; --surface:#FFFFFF; --surface-2:#F6F9F8;
   --ink:#16211E; --muted:#5C6B67; --rule:#D3DBD8; --rule-strong:#9FAEA9;
   --accent:#0F6E63; --accent-soft:#DDEEEB; --accent-ink:#0B4F47;
-  --shadow:0 1px 2px rgba(22,33,30,.05), 0 8px 24px -18px rgba(22,33,30,.35);
+  --warm:#A86400; --warm-soft:#FBF0DC;
+  --shadow:0 1px 2px rgba(22,33,30,.05), 0 10px 28px -20px rgba(22,33,30,.4);
   --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
   --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono","Cascadia Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
     --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
     --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+    --warm:#E0A94A; --warm-soft:#2C2413;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
   }
 }
 :root[data-theme="dark"]{
   --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
   --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
   --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -18px rgba(0,0,0,.8);
+  --warm:#E0A94A; --warm-soft:#2C2413;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
 }
-
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--serif); font-size:17px; line-height:1.6;
-  display:flex; flex-direction:column; min-height:100vh;
-}
-a{color:inherit}
-button{font:inherit; color:inherit; cursor:pointer}
-:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
-sub,sup{line-height:0; font-size:74%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.62;display:flex;flex-direction:column;min-height:100vh}
+sub,sup{line-height:0;font-size:74%}
 sup{vertical-align:.45em} sub{vertical-align:-.22em}
 
-/* ---------- masthead ---------- */
-.masthead{border-bottom:1px solid var(--rule); background:var(--surface)}
-.masthead .inner{
-  max-width:56rem; margin:0 auto; padding:2.6rem 1.25rem 2rem;
-  display:flex; flex-direction:column; gap:.7rem; position:relative;
-}
-.eyebrow{
-  font-family:var(--sans); font-size:.7rem; font-weight:600;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--accent);
-}
-h1{
-  font-family:var(--serif); font-weight:600; font-size:clamp(2rem,5vw,2.8rem);
-  line-height:1.1; margin:0; letter-spacing:-.014em; text-wrap:balance;
-}
-.standfirst{margin:0; color:var(--muted); max-width:60ch; font-size:1.02rem}
-.themeBtn{
-  position:absolute; top:2.6rem; right:1.25rem;
-  font-family:var(--sans); font-size:.78rem; font-weight:550;
-  background:var(--surface); border:1px solid var(--rule); border-radius:2px;
-  padding:.38rem .8rem; color:var(--muted); transition:border-color .15s, color .15s;
-}
-.themeBtn:hover{border-color:var(--rule-strong); color:var(--ink)}
+header.mast{border-bottom:1px solid var(--rule);background:var(--surface)}
+header.mast .inner{max-width:56rem;margin:0 auto;padding:2.3rem 1.25rem 1.8rem;
+  display:flex;flex-direction:column;gap:.55rem}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.5rem);
+  line-height:1.12;margin:0;letter-spacing:-.012em}
+.standfirst{margin:0;color:var(--muted);max-width:60ch;font-size:1.01rem}
+.themebtn{position:absolute;right:1.25rem;top:1.25rem;font-family:var(--sans);
+  font-size:.74rem;font-weight:550;background:var(--surface);border:1px solid var(--rule);
+  border-radius:2px;padding:.28rem .62rem;color:var(--muted);cursor:pointer}
+.themebtn:hover{border-color:var(--rule-strong);color:var(--ink)}
+header.mast{position:relative}
 
-/* ---------- practice sets ---------- */
-main{flex:1 0 auto; max-width:56rem; margin:0 auto; padding:2.2rem 1.25rem 1rem; width:100%}
-.section-label{
-  font-family:var(--sans); font-size:.7rem; font-weight:600; letter-spacing:.13em;
-  text-transform:uppercase; color:var(--muted);
-  display:flex; align-items:center; gap:.8rem; margin-bottom:1rem;
-}
-.section-label::after{content:""; flex:1 1 auto; height:1px; background:var(--rule)}
+main{max-width:56rem;margin:0 auto;padding:2rem 1.25rem 1rem;width:100%;flex:1 0 auto}
+.section-label{font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:.8rem;margin:0 0 1rem}
+.section-label::after{content:"";flex:1 1 auto;height:1px;background:var(--rule)}
+.lead{margin:0 0 1.3rem;color:var(--muted);font-size:.98rem;max-width:66ch}
 
-.lead{margin:0 0 1.3rem; color:var(--muted); font-size:.98rem; max-width:66ch}
-.sets{display:flex; flex-direction:column; gap:1rem; list-style:none; margin:0; padding:0}
+/* ---------- the syllabus ---------- */
+.syl{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.8rem;
+  margin-bottom:1rem}
+.group{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);padding:1rem 1.15rem 1.1rem}
+.group h3{margin:0 0 .15rem;font-family:var(--sans);font-size:.72rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.group .wt{font-size:.75rem;color:var(--muted);margin:0 0 .7rem}
+.group ol{margin:0;padding-left:1.15rem;font-size:.95rem}
+.group li{margin-bottom:.32rem}
+.group li b{font-weight:600}
+.group li .n{color:var(--muted);font-size:.82rem;display:block}
 
-.set{
-  display:block; text-decoration:none;
-  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
-  box-shadow:var(--shadow); padding:1.4rem 1.5rem 1.35rem;
-  transition:border-color .16s, transform .16s;
-}
-.set:hover{border-color:var(--accent); transform:translateY(-1px)}
-.set .kicker{
-  font-family:var(--sans); font-size:.68rem; font-weight:600; letter-spacing:.11em;
-  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.45rem;
-}
-.set h2{
-  font-family:var(--serif); font-weight:600; font-size:1.45rem; line-height:1.2;
-  margin:0 0 .5rem; letter-spacing:-.01em;
-  display:flex; align-items:baseline; gap:.5rem; flex-wrap:wrap;
-}
-.set h2 .go{
-  font-family:var(--sans); font-size:.78rem; font-weight:600; color:var(--accent);
-  letter-spacing:.02em; transition:transform .16s;
-}
-.set:hover h2 .go{transform:translateX(3px)}
-.set p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
-.set .stats, .paperblock .stats{
-  font-family:var(--sans); font-size:.78rem; color:var(--muted);
-  margin:.85rem 0 0; padding:.7rem 0 0; border-top:1px solid var(--rule);
-  display:flex; flex-wrap:wrap; gap:.4rem .5rem; align-items:center;
-}
-.set .stats b, .paperblock .stats b{
-  font-variant-numeric:tabular-nums; font-weight:650; color:var(--ink); margin-right:.15rem;
-}
-.set .stats .sep, .paperblock .stats .sep{color:var(--rule-strong)}
-.set .chips, .paperblock .chips{display:flex; flex-wrap:wrap; gap:.35rem; margin:.7rem 0 0}
-.set .chip, .paperblock .chip{
-  font-family:var(--sans); font-size:.72rem; color:var(--accent-ink);
-  background:var(--accent-soft); border:1px solid var(--accent-soft);
-  border-radius:2px; padding:.16rem .45rem;
-}
-.set .chip b, .paperblock .chip b{font-variant-numeric:tabular-nums; font-weight:650}
+.outside{background:var(--warm-soft);border-left:3px solid var(--warm);border-radius:3px;
+  padding:.8rem 1rem;margin:0 0 2.4rem;font-size:.93rem}
+.outside b:first-child{color:var(--warm)}
+.outside ul{margin:.4rem 0 0;padding-left:1.15rem}
+.outside li{margin-bottom:.15rem}
 
-/* ---------- a paper, with its two ways in ---------- */
-.paperblock{
-  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
-  box-shadow:var(--shadow); padding:1.4rem 1.5rem 1.35rem;
-}
-.paperblock .kicker{
-  font-family:var(--sans); font-size:.68rem; font-weight:600; letter-spacing:.11em;
-  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:.45rem;
-}
-.paperblock h2{
-  font-family:var(--serif); font-weight:600; font-size:1.45rem; line-height:1.2;
-  margin:0 0 .5rem; letter-spacing:-.01em;
-}
-.paperblock > p{margin:0; color:var(--muted); font-size:.98rem; max-width:62ch}
-.paperblock.featured{border-color:var(--accent); border-left:3px solid var(--accent)}
-.paperblock.featured h2::after{content:'ALL SOURCES'; font-family:var(--sans);
-  font-size:.6rem; font-weight:700; letter-spacing:.12em; color:var(--accent);
-  background:var(--accent-soft); border-radius:2px; padding:.15rem .4rem;
-  margin-left:.5rem; vertical-align:.28rem}
-.ways{display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem}
-.way{
-  display:flex; flex-direction:column; gap:.28rem; text-decoration:none;
-  border:1px solid var(--rule); border-radius:3px; padding:.85rem .95rem .8rem;
-  background:var(--surface-2); transition:border-color .16s, transform .16s;
-}
-.way:hover{border-color:var(--accent); transform:translateY(-1px)}
-.way .wk{
-  font-family:var(--sans); font-size:.64rem; font-weight:700; letter-spacing:.13em;
-  text-transform:uppercase; color:var(--accent);
-}
-.way b{font-family:var(--serif); font-size:1.05rem; font-weight:600; line-height:1.25}
-.way .wd{font-size:.86rem; color:var(--muted); line-height:1.45}
-.way .go{
-  font-family:var(--sans); font-size:.76rem; font-weight:600; color:var(--accent);
-  margin-top:.25rem; transition:transform .16s;
-}
+/* ---------- the study card ---------- */
+.sets{display:flex;flex-direction:column;gap:1rem;list-style:none;margin:0;padding:0}
+.paperblock{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);padding:1.4rem 1.5rem 1.35rem}
+.paperblock.featured{border-color:var(--accent);border-left:3px solid var(--accent)}
+.paperblock .kicker{font-size:.68rem;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.45rem}
+.paperblock h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;
+  margin:0 0 .5rem;letter-spacing:-.01em}
+.paperblock > p{margin:0;color:var(--muted);font-size:.97rem;max-width:64ch}
+.stats{display:flex;flex-wrap:wrap;gap:.42rem;align-items:baseline;margin:.6rem 0 0;
+  font-size:.85rem;color:var(--muted)}
+.stats b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:650}
+.stats .sep{color:var(--rule-strong)}
+.caveat{margin:.9rem 0 0;padding:.55rem .8rem;background:var(--warm-soft);
+  border-left:3px solid var(--warm);border-radius:3px;font-size:.87rem;max-width:64ch}
+.caveat b:first-child{color:var(--warm)}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0 0}
+.chip{background:var(--accent-soft);color:var(--accent-ink);border-radius:2px;
+  padding:.14rem .48rem;font-size:.76rem;font-weight:600}
+.chip b{font-variant-numeric:tabular-nums;font-weight:700}
+.ways{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:1rem}
+.way{display:flex;flex-direction:column;gap:.28rem;text-decoration:none;
+  border:1px solid var(--rule);border-radius:3px;padding:.85rem .95rem .8rem;
+  background:var(--surface-2);transition:border-color .16s,transform .16s}
+.way:hover{border-color:var(--accent);transform:translateY(-1px)}
+.way .wk{font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--accent)}
+.way b{font-family:var(--serif);font-size:1.05rem;font-weight:600;line-height:1.25}
+.way .wd{font-size:.86rem;color:var(--muted);line-height:1.45}
+.way .go{font-size:.76rem;font-weight:600;color:var(--accent);margin-top:.25rem;
+  transition:transform .16s}
 .way:hover .go{transform:translateX(3px)}
-@media (max-width:560px){ .ways{grid-template-columns:1fr} }
 
-/* ---------- footer ---------- */
-footer{
-  max-width:56rem; margin:0 auto; padding:2.4rem 1.25rem 3rem; width:100%;
-  font-family:var(--sans); font-size:.78rem; color:var(--muted); line-height:1.65;
-}
-footer .rule{height:1px; background:var(--rule); margin-bottom:1.1rem}
-footer h3{
-  font-size:.68rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-  color:var(--muted); margin:0 0 .5rem;
-}
-footer p{margin:0 0 .9rem; max-width:70ch}
-footer code{
-  font-family:var(--mono); font-size:.9em; background:var(--surface-2);
-  border:1px solid var(--rule); border-radius:3px; padding:.08em .34em;
-}
+footer{max-width:56rem;margin:0 auto;padding:2.2rem 1.25rem 3rem;width:100%;
+  font-size:.78rem;color:var(--muted);line-height:1.65}
+footer .rule{height:1px;background:var(--rule);margin-bottom:1.1rem}
+footer h3{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 .5rem}
+footer p{margin:0 0 .9rem;max-width:72ch}
+footer code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
+  border:1px solid var(--rule);border-radius:3px;padding:.08em .34em}
 @media (prefers-reduced-motion:reduce){*{transition:none !important}}
-@media (max-width:560px){
-  body{font-size:16px}
-  .masthead .inner{padding-top:3.6rem}
-  .themeBtn{top:1.1rem}
-  .set{padding:1.15rem 1.1rem}
-}
 </style>
-<script>
-/* Apply the remembered theme before first paint, so there is no flash of the
-   wrong palette. Shares its storage key with the drill pages. */
-try {
-  var t = localStorage.getItem('isc-chem-theme');
-  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
-} catch (e) {}
-</script>
-</head>
-<body>
 
-<header class="masthead">
+<header class="mast">
+  <button class="themebtn" id="theme" type="button">Dark</button>
   <div class="inner">
-    <button class="themeBtn" id="themeBtn" type="button">Dark</button>
-    <div class="eyebrow">ISC Class 12 &middot; Paper 1 (Theory)</div>
-    <h1>Chemistry Practice</h1>
-    <p class="standfirst">Question sets built from the CISCE board papers, improvement papers and specimen papers. Each paper comes two ways: a <b>Learn</b> version where every question will show you its worked solution, and a <b>timed test</b> over the same questions that marks itself when you submit.</p>
+    <div class="eyebrow">ISC Class 12 &middot; Paper 1 (Theory) &middot; 70 marks</div>
+    <h1>Chemistry</h1>
+    <p class="standfirst">The First Term syllabus, and a revision deck built from it
+    &mdash; every chapter set as past-paper questions with worked solutions you reveal
+    one at a time.</p>
   </div>
 </header>
 
 <main>
-  <div class="section-label">Practice sets</div>
+  <div class="section-label">First Term syllabus</div>
 
-  <p class="lead">Three papers over Chemical Kinetics and Alcohols, Phenols &amp; Ethers. Each
-  comes in two versions built from <b>the same questions in the same order</b> &mdash; one to
-  learn from with the answers on show, one to sit against the clock. <b>Paper 3 is the complete
-  bank</b>, drawn from all six sources; Papers 1 and 2 are shorter subsets of it, useful when
-  you want a sitting you can finish in an hour and a half.</p>
+  <p class="lead">As set out in the school's <b>2026&ndash;27 Chemistry syllabus</b>.
+  Eight chapters, grouped the way the syllabus groups them. The mark weightings are
+  those printed at the head of that document for the paper as a whole.</p>
+
+  <div class="syl">
+    <div class="group">
+      <h3>Physical</h3>
+      <p class="wt">25 marks across the paper</p>
+      <ol>
+        <li><b>Solutions</b><span class="n">Raoult, colligative properties,
+          van&rsquo;t Hoff factor</span></li>
+        <li><b>Chemical Kinetics</b><span class="n">rate law, order, Arrhenius</span></li>
+        <li><b>Electrochemistry</b><span class="n">Nernst, conductance, Faraday</span></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <h3>Inorganic</h3>
+      <p class="wt">14 marks across the paper</p>
+      <ol>
+        <li><b>Coordination Compounds</b><span class="n">nomenclature, isomerism, VBT
+          and CFT</span></li>
+      </ol>
+    </div>
+
+    <div class="group">
+      <h3>Organic</h3>
+      <p class="wt">31 marks across the paper</p>
+      <ol>
+        <li><b>Haloalkanes and Haloarenes</b><span class="n">S<sub>N</sub>1 and
+          S<sub>N</sub>2, named reactions</span></li>
+        <li><b>Alcohols, Phenols and Ethers</b><span class="n">acidity, conversions,
+          ether cleavage</span></li>
+        <li><b>Aldehydes, Ketones and Carboxylic Acids</b><span class="n">addition,
+          haloform, acidity</span></li>
+        <li><b>Biomolecules</b><span class="n">carbohydrates, proteins, vitamins,
+          nucleic acids</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="outside"><b>Held back to the Second Term (Pre-Board).</b> The syllabus
+    places two chapters after the First Term, and notes that the Pre-Board itself
+    covers the full ISC scope:
+    <ul>
+      <li>Organic compounds containing Nitrogen</li>
+      <li>d- and f-Block Elements</li>
+    </ul>
+  </div>
+
+  <div class="section-label">Revision</div>
+
+  <p class="lead">Two slide decks that work as a pair. The first <b>teaches the
+  chemistry</b> &mdash; the concepts in the order they build, the proofs, and every
+  type of problem that gets set. The second <b>tests it</b>, with past-paper questions
+  and worked solutions. Both hide the answer until you ask for it, so you can attempt
+  each one first.</p>
 
   <ul class="sets">
-
     <li class="paperblock featured">
-      <span class="kicker">Everything &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
-      <h2>Complete MCQ bank &mdash; Paper 3</h2>
-      <p>Every 1-mark question in the collection, gathered into one set: the <b>NCERT</b>
-      textbook (worked examples, intext questions and exercises), the <b>NCERT Exemplar</b>,
-      the <b>ISC board papers</b> 2018&ndash;2026 and the 2025 Improvement paper, the
-      <b>ISC specimen papers</b>, CISCE&rsquo;s <b>competency booklet</b>, and the
-      <b>Heritage School</b> papers. It contains all of Paper&nbsp;1 and Paper&nbsp;2 with the
-      NCERT and Exemplar material added, so it is the one to work through if you want
-      complete coverage rather than a shorter sitting.</p>
-      <div class="chips">
-          <span class="chip"><b>20</b> Rate &amp; rate law</span>
-          <span class="chip"><b>21</b> Order &amp; units of k</span>
-          <span class="chip"><b>23</b> First order &amp; half-life</span>
-          <span class="chip"><b>18</b> Arrhenius &amp; E<sub>a</sub></span>
-          <span class="chip"><b>29</b> Kinetics theory</span>
-          <span class="chip"><b>27</b> Structure &amp; properties</span>
-          <span class="chip"><b>21</b> Acidity &amp; trends</span>
-          <span class="chip"><b>32</b> Reactions &amp; conversions</span>
-          <span class="chip"><b>14</b> Tests &amp; identification</span>
-          <span class="chip"><b>13</b> Mechanisms &amp; ethers</span>
-      </div>
+      <span class="kicker">Slide show &middot; learn it &middot; all eight chapters</span>
+      <h2>Concepts, Proofs &amp; Problem Types</h2>
+      <p>The complete First Term revision document as a slide show, one idea to a
+      slide. Each chapter runs concepts &rarr; proofs &rarr; problem types &rarr; a
+      one-slide recall sheet. Derivations and worked examples stay hidden behind a
+      button.</p>
       <p class="stats">
-        <span><b>218</b> questions</span> <span class="sep">&middot;</span>
-        <span>111 kinetics, 107 organic</span> <span class="sep">&middot;</span>
-        <span>same questions in both versions</span> <span class="sep">&middot;</span>
-        <span>NCERT, Exemplar, ISC, specimen, competency, Heritage</span>
+        <span><b>120</b> concepts</span> <span class="sep">&middot;</span>
+        <span><b>42</b> proofs and mechanisms</span> <span class="sep">&middot;</span>
+        <span><b>122</b> problem types</span> <span class="sep">&middot;</span>
+        <span><b>8</b> recall sheets</span> <span class="sep">&middot;</span>
+        <span><b>309</b> slides</span>
       </p>
+      <div class="chips">
+        <span class="chip">Solutions <b>34</b></span>
+        <span class="chip">Electrochemistry <b>36</b></span>
+        <span class="chip">Chemical Kinetics <b>47</b></span>
+        <span class="chip">Coordination <b>34</b></span>
+        <span class="chip">Haloalkanes <b>32</b></span>
+        <span class="chip">Alcohols, Phenols &amp; Ethers <b>50</b></span>
+        <span class="chip">Carbonyls &amp; Acids <b>40</b></span>
+        <span class="chip">Biomolecules <b>28</b></span>
+      </div>
       <div class="ways">
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-3-Complete-Learn.html">
-          <span class="wk">Version 1 &middot; Learn</span>
-          <b>Study with the answers</b>
-          <span class="wd">All 218 questions with a <i>Show answer</i> on each, and a
-            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
-            clock, no score &mdash; this one is for learning.</span>
-          <span class="go">Open &rarr;</span>
+        <a class="way" href="First-Term-Concepts.html">
+          <span class="wk">Read &middot; then try each one</span>
+          <b>Concept, proof, problem type &mdash; one to a slide</b>
+          <span class="wd">Every concept ends in a <i>Hold on to this</i> line; every
+          problem type tells you what to recognise and what method to use before it
+          shows you the worked example. Each chapter closes with a recall sheet you can
+          revise from on its own.</span>
+          <span class="go">Start &rarr;</span>
         </a>
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-3-Complete-Test.html">
-          <span class="wk">Version 2 &middot; Timed test</span>
-          <b>210 minutes, 218 marks</b>
-          <span class="wd">The same 218 questions sat as a paper &mdash; one minute each,
-            rounded to the nearest half hour. Nothing is marked until you submit, and the
-            marked paper doubles as a review.</span>
+      </div>
+    </li>
+    <li class="paperblock featured">
+      <span class="kicker">Slide show &middot; test it &middot; all eight chapters</span>
+      <h2>First Term Revision &mdash; past-paper questions</h2>
+      <p>Every question is taken from an ISC board paper, a CISCE specimen paper or a
+      Heritage School paper. One question to a slide, moved with the arrow keys or by
+      swiping, with a chapter jump menu and your place remembered between visits.</p>
+      <p class="stats">
+        <span><b>210</b> questions</span> <span class="sep">&middot;</span>
+        <span><b>8</b> chapters</span> <span class="sep">&middot;</span>
+        <span><b>218</b> slides</span> <span class="sep">&middot;</span>
+        <span>solutions hidden until you ask</span> <span class="sep">&middot;</span>
+        <span>prints as a booklet</span>
+      </p>
+      <div class="chips">
+        <span class="chip">Solutions <b>20</b></span>
+        <span class="chip">Chemical Kinetics <b>44</b></span>
+        <span class="chip">Electrochemistry <b>18</b></span>
+        <span class="chip">Coordination <b>18</b></span>
+        <span class="chip">Haloalkanes <b>16</b></span>
+        <span class="chip">Alcohols, Phenols &amp; Ethers <b>60</b></span>
+        <span class="chip">Carbonyls &amp; Acids <b>20</b></span>
+        <span class="chip">Biomolecules <b>14</b></span>
+      </div>
+      <div class="ways">
+        <a class="way" href="First-Term-Revision.html">
+          <span class="wk">Open the deck</span>
+          <b>Question, then solution &mdash; one slide at a time</b>
+          <span class="wd">Each solution gives the reasoning before the answer, works
+          the numbers out in steps, and flags the common slip. Reveal a whole chapter at
+          once if you would rather read it straight through, and mark questions done as
+          you go.</span>
           <span class="go">Start &rarr;</span>
         </a>
       </div>
     </li>
 
     <li class="paperblock">
-      <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
-      <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 1</h2>
-      <p>Rate laws and order from initial-rate data, first-order and half-life problems, the Arrhenius equation, collision theory; then acidity and boiling-point trends, named reactions, distinguishing tests, structure elucidation and the ether-cleavage rules. Many of these began as subjective 2 and 3 mark questions, so several options run to a paragraph &mdash; what you pick between is the reasoning, not just a number.</p>
-      <div class="chips">
-          <span class="chip"><b>6</b> Rate &amp; rate law</span>
-          <span class="chip"><b>6</b> Order &amp; units of k</span>
-          <span class="chip"><b>8</b> First order &amp; half-life</span>
-          <span class="chip"><b>7</b> Arrhenius &amp; E<sub>a</sub></span>
-          <span class="chip"><b>6</b> Kinetics theory</span>
-          <span class="chip"><b>7</b> Structure &amp; properties</span>
-          <span class="chip"><b>7</b> Acidity &amp; trends</span>
-          <span class="chip"><b>10</b> Reactions &amp; conversions</span>
-          <span class="chip"><b>6</b> Tests &amp; identification</span>
-          <span class="chip"><b>5</b> Mechanisms &amp; ethers</span>
-      </div>
-      <p class="stats">
-        <span><b>68</b> questions</span> <span class="sep">&middot;</span>
-        <span>same questions in both versions</span> <span class="sep">&middot;</span>
-        <span>ISC 2018&ndash;2026, specimen 2018 &amp; 2022&ndash;2027, Heritage</span>
-      </p>
+      <span class="kicker">Notes &middot; Unit 7</span>
+      <h2>Alcohols, Phenols &amp; Ethers &mdash; the concepts</h2>
+      <p>A companion to chapter 6 of the deck: the ideas behind the organic questions,
+      explained with diagrams rather than lists, ending in a ten-minute recall table.</p>
       <div class="ways">
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-1-Learn.html">
-          <span class="wk">Version 1 &middot; Learn</span>
-          <b>Study with the answers</b>
-          <span class="wd">All 68 questions with a <i>Show answer</i> on each, and a
-            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
-            clock, no score &mdash; this one is for learning.</span>
+        <a class="way" href="Alcohols-Phenols-Ethers-Revision.html">
+          <span class="wk">Read &middot; no clock</span>
+          <b>Hydrogen bonding, acidity, carbocations, ethers</b>
+          <span class="wd">Why an alcohol boils above its isomeric ether, why phenoxide
+          makes phenol an acid, what decides S<sub>N</sub>1 against S<sub>N</sub>2, and
+          which fragment of an ether keeps the iodine.</span>
           <span class="go">Open &rarr;</span>
-        </a>
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-1-Test.html">
-          <span class="wk">Version 2 &middot; Timed test</span>
-          <b>90 minutes, 68 marks</b>
-          <span class="wd">The same 68 questions sat as a paper. Change your answers
-            freely; nothing is marked until you submit, and it submits itself when the
-            time is up. The marked paper doubles as a review.</span>
-          <span class="go">Start &rarr;</span>
-        </a>
-      </div>
-    </li>
-
-    <li class="paperblock">
-      <span class="kicker">Chapters &middot; Chemical Kinetics; Alcohols, Phenols &amp; Ethers</span>
-      <h2>Kinetics, Alcohols, Phenols &amp; Ethers &mdash; Paper 2</h2>
-      <p>A second set over the same two chapters, sharing no question with Paper&nbsp;1. Built around CISCE&rsquo;s <i>Competency-Focused Practice Questions</i> booklet, so the emphasis falls on application and reasoning rather than recall &mdash; assertion&ndash;reason items, data tables, graph reading and multi-step conversions. <b>Every option is explained</b>, not just the right one.</p>
-      <div class="chips">
-          <span class="chip"><b>6</b> Rate &amp; rate law</span>
-          <span class="chip"><b>6</b> Order &amp; units of k</span>
-          <span class="chip"><b>8</b> First order &amp; half-life</span>
-          <span class="chip"><b>6</b> Arrhenius &amp; E<sub>a</sub></span>
-          <span class="chip"><b>5</b> Kinetics theory</span>
-          <span class="chip"><b>6</b> Structure &amp; properties</span>
-          <span class="chip"><b>6</b> Acidity &amp; trends</span>
-          <span class="chip"><b>8</b> Reactions &amp; conversions</span>
-          <span class="chip"><b>5</b> Tests &amp; identification</span>
-          <span class="chip"><b>5</b> Mechanisms &amp; ethers</span>
-      </div>
-      <p class="stats">
-        <span><b>61</b> questions</span> <span class="sep">&middot;</span>
-        <span>same questions in both versions</span> <span class="sep">&middot;</span>
-        <span>CISCE competency booklet, ISC 2018&ndash;2026</span>
-      </p>
-      <div class="ways">
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-2-Learn.html">
-          <span class="wk">Version 1 &middot; Learn</span>
-          <b>Study with the answers</b>
-          <span class="wd">All 61 questions with a <i>Show answer</i> on each, and a
-            <i>Reveal all</i> for the whole set. Every solution is explained in full. No
-            clock, no score &mdash; this one is for learning.</span>
-          <span class="go">Open &rarr;</span>
-        </a>
-        <a class="way" href="Kinetics-Alcohols-Phenols-Ethers-Paper-2-Test.html">
-          <span class="wk">Version 2 &middot; Timed test</span>
-          <b>90 minutes, 61 marks</b>
-          <span class="wd">The same 61 questions sat as a paper. Change your answers
-            freely; nothing is marked until you submit, and it submits itself when the
-            time is up. The marked paper doubles as a review.</span>
-          <span class="go">Start &rarr;</span>
         </a>
       </div>
     </li>
 
     <!-- ============================================================
-         TO ADD ANOTHER PAPER: copy one <li class="paperblock"> above,
-         change the paper number in the two hrefs, the heading, the
-         description, the chips and the question and minute counts.
-         Both pages are generated by src/build_chem_drill.py.
+         TO ADD ANOTHER STUDY PAGE: copy one <li class="paperblock">
+         above, change the heading, the description and the href.
+         Drop "featured" unless it should carry the accent border.
          ============================================================ -->
-
   </ul>
 </main>
 
 <footer>
   <div class="rule"></div>
-  <h3>About these sets</h3>
-  <p>Questions are drawn from the ISC Chemistry Paper 1 board papers for 2018&ndash;2026, the 2025 Improvement paper, the CISCE specimen papers for 2018 and 2022&ndash;2027, and Heritage School pre-board and first-term papers. Every numerical answer was recomputed independently rather than copied across.</p>
-  <p>Check the current syllabus in <code>Syllabus/</code> before working through the older papers &mdash; it decides what is still examinable, and some topics in the 2018&ndash;2020 papers have since been dropped. More sets will be added to this page.</p>
+  <h3>About</h3>
+  <p>Questions are drawn from the ISC Chemistry Paper 1 board papers for
+  2018&ndash;2026 and the 2025 Improvement paper, the CISCE specimen papers for 2018 and
+  2022&ndash;2027, and the Heritage School 2016&ndash;17 pre-board and 2024&ndash;25
+  first-term papers. Four of those board papers have no text layer and were read by OCR
+  into <code>OCR/</code>. Every numerical answer was recomputed independently rather
+  than copied across.</p>
+  <p>The chapter list above is the school's own First Term split for 2026&ndash;27, not
+  the ISC unit order. Check the ISC 2027 syllabus in <code>Syllabus/</code> for what is
+  examinable before working through the older papers &mdash; some topics in the 2018&ndash;2020
+  papers have since been dropped.</p>
 </footer>
 
 <script>
-/* Remember the reader's light / dark choice across this page and the drills.
-   The stored value is applied by the small script in <head>. */
-var KEY = 'isc-chem-theme';
-function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
-
-function isDark(){
-  var set = document.documentElement.getAttribute('data-theme');
-  if (set) return set === 'dark';
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
-var btn = document.getElementById('themeBtn');
-function syncBtn(){ btn.textContent = isDark() ? 'Light' : 'Dark'; }
-btn.addEventListener('click', function(){
-  var next = isDark() ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  save(next);
-  syncBtn();
-});
-syncBtn();
+(function(){
+  var K='isc-chem-theme', r=document.documentElement, b=document.getElementById('theme');
+  function cur(){ return r.getAttribute('data-theme')
+    || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'); }
+  function paint(){ b.textContent = cur()==='dark' ? 'Light' : 'Dark'; }
+  try{ var s=localStorage.getItem(K); if(s) r.setAttribute('data-theme',s); }catch(e){}
+  paint();
+  b.addEventListener('click', function(){
+    var n = cur()==='dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', n);
+    try{ localStorage.setItem(K, n); }catch(e){}
+    paint();
+  });
+})();
 </script>
-</body>
-</html>
