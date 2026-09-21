@@ -2,361 +2,114 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ISC Chemistry &#8212; Class 12</title>
-<!--
-  Hand-maintained landing page. It carries two things and nothing else: the
-  First Term syllabus, and the revision deck built from it.
-
-  The syllabus below is transcribed from
-  Competency/2026-27-CL12-Chemistry Syllabus .pdf, the school's own First Term /
-  Second Term split for the 2026-27 session. If that file is replaced, update the
-  three groups here to match.
-
-  The revision deck is generated -- rebuild with
-      cd src && python3 build_ft_deck.py
-  A commented-out template for adding a second study page sits near the bottom.
--->
 <style>
-:root{
-  --bg:#EFF2F0; --surface:#FFFFFF; --surface-2:#F6F9F8;
-  --ink:#16211E; --muted:#5C6B67; --rule:#D3DBD8; --rule-strong:#9FAEA9;
-  --accent:#0F6E63; --accent-soft:#DDEEEB; --accent-ink:#0B4F47;
-  --warm:#A86400; --warm-soft:#FBF0DC;
-  --shadow:0 1px 2px rgba(22,33,30,.05), 0 10px 28px -20px rgba(22,33,30,.4);
-  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
-  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
-    --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
-    --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
-    --warm:#E0A94A; --warm-soft:#2C2413;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0D1413; --surface:#141D1B; --surface-2:#1A2422;
-  --ink:#E4EDEA; --muted:#93A49F; --rule:#26332F; --rule-strong:#4A5C57;
-  --accent:#4FC2B0; --accent-soft:#12302C; --accent-ink:#8FDCCE;
-  --warm:#E0A94A; --warm-soft:#2C2413;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -20px rgba(0,0,0,.8);
-}
+:root{--bg:#EFF2F0;--surface:#fff;--ink:#16211E;--muted:#5C6B67;--rule:#D3DBD8;
+  --accent:#0F6E63;--accent-soft:#DDEEEB;--accent-ink:#0B4F47;
+  --shadow:0 1px 2px rgba(22,33,30,.05),0 10px 28px -20px rgba(22,33,30,.4)}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-  font-size:16px;line-height:1.62;display:flex;flex-direction:column;min-height:100vh}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.6;
+  font-family:"STIX Two Text","Liberation Serif",Georgia,serif}
 sub,sup{line-height:0;font-size:74%}
-sup{vertical-align:.45em} sub{vertical-align:-.22em}
-
-header.mast{border-bottom:1px solid var(--rule);background:var(--surface)}
-header.mast .inner{max-width:56rem;margin:0 auto;padding:2.3rem 1.25rem 1.8rem;
-  display:flex;flex-direction:column;gap:.55rem}
-.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent)}
-h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,4.4vw,2.5rem);
-  line-height:1.12;margin:0;letter-spacing:-.012em}
-.standfirst{margin:0;color:var(--muted);max-width:60ch;font-size:1.01rem}
-.themebtn{position:absolute;right:1.25rem;top:1.25rem;font-family:var(--sans);
-  font-size:.74rem;font-weight:550;background:var(--surface);border:1px solid var(--rule);
-  border-radius:2px;padding:.28rem .62rem;color:var(--muted);cursor:pointer}
-.themebtn:hover{border-color:var(--rule-strong);color:var(--ink)}
-header.mast{position:relative}
-
-main{max-width:56rem;margin:0 auto;padding:2rem 1.25rem 1rem;width:100%;flex:1 0 auto}
-.section-label{font-size:.7rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--muted);display:flex;align-items:center;gap:.8rem;margin:0 0 1rem}
-.section-label::after{content:"";flex:1 1 auto;height:1px;background:var(--rule)}
-.lead{margin:0 0 1.3rem;color:var(--muted);font-size:.98rem;max-width:66ch}
-
-/* ---------- the syllabus ---------- */
-.syl{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.8rem;
-  margin-bottom:1rem}
-.group{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
-  box-shadow:var(--shadow);padding:1rem 1.15rem 1.1rem}
-.group h3{margin:0 0 .15rem;font-family:var(--sans);font-size:.72rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-.group .wt{font-size:.75rem;color:var(--muted);margin:0 0 .7rem}
-.group ol{margin:0;padding-left:1.15rem;font-size:.95rem}
-.group li{margin-bottom:.32rem}
-.group li b{font-weight:600}
-.group li .n{color:var(--muted);font-size:.82rem;display:block}
-
-.outside{background:var(--warm-soft);border-left:3px solid var(--warm);border-radius:3px;
-  padding:.8rem 1rem;margin:0 0 2.4rem;font-size:.93rem}
-.outside b:first-child{color:var(--warm)}
-.outside ul{margin:.4rem 0 0;padding-left:1.15rem}
-.outside li{margin-bottom:.15rem}
-
-/* ---------- the study card ---------- */
-.sets{display:flex;flex-direction:column;gap:1rem;list-style:none;margin:0;padding:0}
-.sets + .section-label{margin-top:2.6rem}
-.paperblock{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
-  box-shadow:var(--shadow);padding:1.4rem 1.5rem 1.35rem}
-.paperblock.featured{border-color:var(--accent);border-left:3px solid var(--accent)}
-.paperblock .kicker{font-size:.68rem;font-weight:600;letter-spacing:.11em;
-  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.45rem}
-.paperblock h2{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;
-  margin:0 0 .5rem;letter-spacing:-.01em}
-.paperblock > p{margin:0;color:var(--muted);font-size:.97rem;max-width:64ch}
-.stats{display:flex;flex-wrap:wrap;gap:.42rem;align-items:baseline;margin:.6rem 0 0;
-  font-size:.85rem;color:var(--muted)}
-.stats b{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:650}
-.stats .sep{color:var(--rule-strong)}
-.caveat{margin:.9rem 0 0;padding:.55rem .8rem;background:var(--warm-soft);
-  border-left:3px solid var(--warm);border-radius:3px;font-size:.87rem;max-width:64ch}
-.caveat b:first-child{color:var(--warm)}
-.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0 0}
-.chip{background:var(--accent-soft);color:var(--accent-ink);border-radius:2px;
-  padding:.14rem .48rem;font-size:.76rem;font-weight:600}
-.chip b{font-variant-numeric:tabular-nums;font-weight:700}
-.ways{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:1rem}
-.way{display:flex;flex-direction:column;gap:.28rem;text-decoration:none;
-  border:1px solid var(--rule);border-radius:3px;padding:.85rem .95rem .8rem;
-  background:var(--surface-2);transition:border-color .16s,transform .16s}
-.way:hover{border-color:var(--accent);transform:translateY(-1px)}
-.way .wk{font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--accent)}
-.way b{font-family:var(--serif);font-size:1.05rem;font-weight:600;line-height:1.25}
-.way .wd{font-size:.86rem;color:var(--muted);line-height:1.45}
-.way .go{font-size:.76rem;font-weight:600;color:var(--accent);margin-top:.25rem;
-  transition:transform .16s}
-.way:hover .go{transform:translateX(3px)}
-
-footer{max-width:56rem;margin:0 auto;padding:2.2rem 1.25rem 3rem;width:100%;
-  font-size:.78rem;color:var(--muted);line-height:1.65}
-footer .rule{height:1px;background:var(--rule);margin-bottom:1.1rem}
-footer h3{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 .5rem}
-footer p{margin:0 0 .9rem;max-width:72ch}
-footer code{font-family:var(--mono);font-size:.9em;background:var(--surface-2);
-  border:1px solid var(--rule);border-radius:3px;padding:.08em .34em}
-@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+b,strong{font-weight:600}
+a{color:var(--accent-ink)}
+.mast{background:var(--surface);border-bottom:1px solid var(--rule)}
+.mast .in{max-width:980px;margin:0 auto;padding:18px 22px 26px}
+.nav{display:flex;gap:6px;margin:0 0 16px;flex-wrap:wrap}
+.nav a{font-size:.85rem;text-decoration:none;color:var(--muted);border:1px solid var(--rule);
+  border-radius:16px;padding:4px 14px;background:var(--surface)}
+.nav a:hover{background:var(--accent-soft)}
+.nav a.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.big{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  margin:6px 0 4px}
+.big a.tile{display:flex;flex-direction:column;gap:8px;text-decoration:none;
+  background:var(--surface);border:1px solid var(--rule);border-radius:12px;
+  padding:24px;box-shadow:var(--shadow);color:var(--ink)}
+.big a.tile:hover{border-color:var(--accent)}
+.big .t{font-size:1.5rem;font-weight:600;color:var(--accent-ink)}
+.big .d{font-size:.95rem;color:#333}
+.big .n{font-size:.8rem;color:var(--muted);margin-top:auto}
+.kick{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);font-weight:700}
+h1{margin:10px 0 6px;font-size:2.3rem;font-weight:600;letter-spacing:-.01em}
+.sub{margin:0;color:var(--muted);font-size:1.05rem}
+.wrap{max-width:980px;margin:0 auto;padding:24px 22px 90px}
+.sec{font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;margin:30px 0 12px}
+.grid{display:grid;gap:15px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+  padding:16px 18px;display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow)}
+.card h3{margin:0;font-size:1.12rem}
+.card h3 a{text-decoration:none}
+.card p{margin:0;font-size:.93rem;color:#333}
+.chip{display:inline-block;border:1px solid var(--accent);color:var(--accent-ink);
+  border-radius:14px;padding:2px 11px;font-size:.78rem;font-weight:600;margin-top:auto}
+.pdf{font-size:.95rem}
+.pdf a{text-decoration:none;font-weight:600}
+.pdf .d{color:var(--muted);font-size:.87rem}
+.note{background:var(--surface);border:1px solid var(--rule);border-radius:10px;
+  padding:14px 18px;font-size:.92rem;box-shadow:var(--shadow)}
+.note b{color:var(--accent-ink)}
+.note ul{margin:8px 0 0;padding-left:20px}
+.note li{margin-bottom:4px}
+footer{max-width:980px;margin:0 auto;padding:0 22px 60px;color:var(--muted);font-size:.85rem}
+@media(max-width:620px){h1{font-size:1.8rem}body{font-size:16px}}
 </style>
 
-<header class="mast">
-  <button class="themebtn" id="theme" type="button">Dark</button>
-  <div class="inner">
-    <div class="eyebrow">ISC Class 12 &middot; Paper 1 (Theory) &middot; 70 marks</div>
-    <h1>Chemistry</h1>
-    <p class="standfirst">The First Term syllabus, and a revision deck built from it
-    &mdash; every chapter set as past-paper questions with worked solutions you reveal
-    one at a time.</p>
-  </div>
-</header>
+<header class="mast"><div class="in">
+  <nav class="nav"><a href="index.html" class="on">Home</a><a href="tests.html">Sit a paper</a><a href="revision.html">Revise</a></nav>
+  <p class="kick">ISC Class 12 &middot; Chemistry &middot; First Term</p>
+  <h1>Chemistry</h1>
+  <p class="sub">Timed papers to sit, decks to revise from, and the school papers worked through.</p>
+</div></header>
 
-<main>
-  <div class="section-label">First Term syllabus</div>
+<div class="wrap">
 
-  <p class="lead">As set out in the school's <b>2026&ndash;27 Chemistry syllabus</b>.
-  Eight chapters, grouped the way the syllabus groups them. The mark weightings are
-  those printed at the head of that document for the paper as a whole.</p>
-
-  <div class="syl">
-    <div class="group">
-      <h3>Physical</h3>
-      <p class="wt">25 marks across the paper</p>
-      <ol>
-        <li><b>Solutions</b><span class="n">Raoult, colligative properties,
-          van&rsquo;t Hoff factor</span></li>
-        <li><b>Chemical Kinetics</b><span class="n">rate law, order, Arrhenius</span></li>
-        <li><b>Electrochemistry</b><span class="n">Nernst, conductance, Faraday</span></li>
-      </ol>
-    </div>
-
-    <div class="group">
-      <h3>Inorganic</h3>
-      <p class="wt">14 marks across the paper</p>
-      <ol>
-        <li><b>Coordination Compounds</b><span class="n">nomenclature, isomerism, VBT
-          and CFT</span></li>
-      </ol>
-    </div>
-
-    <div class="group">
-      <h3>Organic</h3>
-      <p class="wt">31 marks across the paper</p>
-      <ol>
-        <li><b>Haloalkanes and Haloarenes</b><span class="n">S<sub>N</sub>1 and
-          S<sub>N</sub>2, named reactions</span></li>
-        <li><b>Alcohols, Phenols and Ethers</b><span class="n">acidity, conversions,
-          ether cleavage</span></li>
-        <li><b>Aldehydes, Ketones and Carboxylic Acids</b><span class="n">addition,
-          haloform, acidity</span></li>
-        <li><b>Biomolecules</b><span class="n">carbohydrates, proteins, vitamins,
-          nucleic acids</span></li>
-      </ol>
-    </div>
+  <div class="big">
+    <a class="tile" href="tests.html">
+      <span class="t">Sit a paper &rarr;</span>
+      <span class="d">Seven timed papers and three timed drills. Each locks when
+      you start, marks itself the moment you stop, and opens a worked
+      explanation on every question.</span>
+      <span class="n">10 timed papers</span>
+    </a>
+    <a class="tile" href="revision.html">
+      <span class="t">Revise &rarr;</span>
+      <span class="d">The practical experiments one to a page, revision and
+      concept decks, the Coordination notes with NCERT page links, both
+      Heritage papers solved, untimed drills and the reference PDFs.</span>
+      <span class="n">10 decks and pages &middot; 10 documents</span>
+    </a>
   </div>
 
-  <div class="outside"><b>Held back to the Second Term (Pre-Board).</b> The syllabus
-    places two chapters after the First Term, and notes that the Pre-Board itself
-    covers the full ISC scope:
-    <ul>
-      <li>Organic compounds containing Nitrogen</li>
-      <li>d- and f-Block Elements</li>
-    </ul>
+  <div class="note">
+    <b>New &mdash; <a href="Practical-Experiments.html">Practical experiments,
+    one to a page</a>.</b> All 24 experiments of the First Term practical
+    course. Each page gives the question, then <i>what I would do</i>,
+    <i>what I should observe</i> and <i>what I conclude</i>, with the
+    equations, a worked calculation and a <b>coloured diagram</b> of the
+    apparatus. Printing gives one experiment per sheet.
   </div>
 
-  <div class="section-label">Revision</div>
+  <div class="note">
+    <b><a href="Test-Heritage-Class-Questions.html">Test based on Heritage
+    Class Questions</a>.</b> Every question from the seven class worksheets,
+    set as objective questions at two minutes each.
+  </div>
 
-  <p class="lead">Two slide decks that work as a pair. The first <b>teaches the
-  chemistry</b> &mdash; the concepts in the order they build, the proofs, and every
-  type of problem that gets set. The second <b>tests it</b>, with past-paper questions
-  and worked solutions. Both hide the answer until you ask for it, so you can attempt
-  each one first.</p>
+  <div class="note">
+    <b>How to use it.</b> Learn from a deck, sit a paper under the clock, then
+    read the worked answers. The decks are untimed and remember your place; the
+    papers do not let you dip in and out.
+  </div>
 
-  <ul class="sets">
-    <li class="paperblock featured">
-      <span class="kicker">Slide show &middot; learn it &middot; all eight chapters</span>
-      <h2>Concepts, Proofs &amp; Problem Types</h2>
-      <p>The complete First Term revision document as a slide show, one idea to a
-      slide. Each chapter runs concepts &rarr; proofs &rarr; problem types &rarr; a
-      one-slide recall sheet. Derivations and worked examples stay hidden behind a
-      button.</p>
-      <p class="stats">
-        <span><b>120</b> concepts</span> <span class="sep">&middot;</span>
-        <span><b>42</b> proofs and mechanisms</span> <span class="sep">&middot;</span>
-        <span><b>122</b> problem types</span> <span class="sep">&middot;</span>
-        <span><b>8</b> recall sheets</span> <span class="sep">&middot;</span>
-        <span><b>309</b> slides</span>
-      </p>
-      <div class="chips">
-        <span class="chip">Solutions <b>34</b></span>
-        <span class="chip">Electrochemistry <b>36</b></span>
-        <span class="chip">Chemical Kinetics <b>47</b></span>
-        <span class="chip">Coordination <b>34</b></span>
-        <span class="chip">Haloalkanes <b>32</b></span>
-        <span class="chip">Alcohols, Phenols &amp; Ethers <b>50</b></span>
-        <span class="chip">Carbonyls &amp; Acids <b>40</b></span>
-        <span class="chip">Biomolecules <b>28</b></span>
-      </div>
-      <div class="ways">
-        <a class="way" href="First-Term-Concepts.html">
-          <span class="wk">Read &middot; then try each one</span>
-          <b>Concept, proof, problem type &mdash; one to a slide</b>
-          <span class="wd">Every concept ends in a <i>Hold on to this</i> line; every
-          problem type tells you what to recognise and what method to use before it
-          shows you the worked example. Each chapter closes with a recall sheet you can
-          revise from on its own.</span>
-          <span class="go">Start &rarr;</span>
-        </a>
-      </div>
-    </li>
-    <li class="paperblock featured">
-      <span class="kicker">Slide show &middot; test it &middot; all eight chapters</span>
-      <h2>First Term Revision &mdash; past-paper questions</h2>
-      <p>Every question is taken from an ISC board paper, a CISCE specimen paper or a
-      Heritage School paper. One question to a slide, moved with the arrow keys or by
-      swiping, with a chapter jump menu and your place remembered between visits.</p>
-      <p class="stats">
-        <span><b>210</b> questions</span> <span class="sep">&middot;</span>
-        <span><b>8</b> chapters</span> <span class="sep">&middot;</span>
-        <span><b>218</b> slides</span> <span class="sep">&middot;</span>
-        <span>solutions hidden until you ask</span> <span class="sep">&middot;</span>
-        <span>prints as a booklet</span>
-      </p>
-      <div class="chips">
-        <span class="chip">Solutions <b>20</b></span>
-        <span class="chip">Chemical Kinetics <b>44</b></span>
-        <span class="chip">Electrochemistry <b>18</b></span>
-        <span class="chip">Coordination <b>18</b></span>
-        <span class="chip">Haloalkanes <b>16</b></span>
-        <span class="chip">Alcohols, Phenols &amp; Ethers <b>60</b></span>
-        <span class="chip">Carbonyls &amp; Acids <b>20</b></span>
-        <span class="chip">Biomolecules <b>14</b></span>
-      </div>
-      <div class="ways">
-        <a class="way" href="First-Term-Revision.html">
-          <span class="wk">Open the deck</span>
-          <b>Question, then solution &mdash; one slide at a time</b>
-          <span class="wd">Each solution gives the reasoning before the answer, works
-          the numbers out in steps, and flags the common slip. Reveal a whole chapter at
-          once if you would rather read it straight through, and mark questions done as
-          you go.</span>
-          <span class="go">Start &rarr;</span>
-        </a>
-      </div>
-    </li>
-
-
-    <!-- ============================================================
-         TO ADD ANOTHER STUDY PAGE: copy one <li class="paperblock">
-         above, change the heading, the description and the href.
-         Drop "featured" unless it should carry the accent border.
-         ============================================================ -->
-  </ul>
-
-  <div class="section-label">Sit a paper</div>
-
-  <p class="lead">A timed paper to sit once you have worked through the decks. Unlike
-  them it does not let you dip in and out &mdash; it locks the moment you start, and
-  marks itself the moment you stop.</p>
-
-  <ul class="sets">
-    <li class="paperblock">
-      <span class="kicker">Timed paper &middot; Physical Chemistry</span>
-      <h2>Physical Chemistry Test</h2>
-      <p>Solutions, Electrochemistry and Chemical Kinetics &mdash; the three Physical
-      Chemistry chapters of the First Term, set as one paper in the style of Section A
-      of the board paper.</p>
-      <p class="stats">
-        <span><b>40</b> questions</span> <span class="sep">&middot;</span>
-        <span><b>1</b> mark each</span> <span class="sep">&middot;</span>
-        <span><b>40</b> marks</span> <span class="sep">&middot;</span>
-        <span><b>2</b> hours</span> <span class="sep">&middot;</span>
-        <span>no negative marking</span>
-      </p>
-      <div class="chips">
-        <span class="chip">Solutions <b>14</b></span>
-        <span class="chip">Electrochemistry <b>14</b></span>
-        <span class="chip">Chemical Kinetics <b>12</b></span>
-      </div>
-      <div class="ways">
-        <a class="way" href="Physical-Chemistry-Test.html">
-          <span class="wk">Sit the paper &middot; 2 hours on the clock</span>
-          <b>40 marks, marked the moment you submit</b>
-          <span class="wd">Your marks, a chapter-by-chapter breakdown and a worked
-          explanation for every question, showing your answer against the correct
-          one. Nothing is marked until you submit.</span>
-          <span class="go">Start &rarr;</span>
-        </a>
-      </div>
-      <p class="caveat"><b>It locks once you start.</b> Closing the tab, reloading or
-      navigating away submits the paper with the answers you have given so far, and
-      there is no way back into it. Begin only when you have two clear hours.</p>
-    </li>
-  </ul>
-</main>
+</div>
 
 <footer>
-  <div class="rule"></div>
-  <h3>About</h3>
-  <p>Questions are drawn from the ISC Chemistry Paper 1 board papers for
-  2018&ndash;2026 and the 2025 Improvement paper, the CISCE specimen papers for 2018 and
-  2022&ndash;2027, and the Heritage School 2016&ndash;17 pre-board and 2024&ndash;25
-  first-term papers. Four of those board papers have no text layer and were read by OCR
-  into <code>OCR/</code>. Every numerical answer was recomputed independently rather
-  than copied across.</p>
-  <p>The chapter list above is the school's own First Term split for 2026&ndash;27, not
-  the ISC unit order. Check the ISC 2027 syllabus in <code>Syllabus/</code> for what is
-  examinable before working through the older papers &mdash; some topics in the 2018&ndash;2020
-  papers have since been dropped.</p>
+  <p>Everything here is generated from the sources in the repository &mdash; the
+  ISC board and specimen papers, the CISCE competency booklet, the NCERT
+  textbook and the school papers and worksheets. Questions carry a worked
+  explanation and name where they came from.</p>
+  <p>Static and fully relative: push this folder to GitHub and turn on Pages. To
+  read it locally, run <code>python3 -m http.server</code> here rather than
+  opening the file directly.</p>
 </footer>
-
-<script>
-(function(){
-  var K='isc-chem-theme', r=document.documentElement, b=document.getElementById('theme');
-  function cur(){ return r.getAttribute('data-theme')
-    || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'); }
-  function paint(){ b.textContent = cur()==='dark' ? 'Light' : 'Dark'; }
-  try{ var s=localStorage.getItem(K); if(s) r.setAttribute('data-theme',s); }catch(e){}
-  paint();
-  b.addEventListener('click', function(){
-    var n = cur()==='dark' ? 'light' : 'dark';
-    r.setAttribute('data-theme', n);
-    try{ localStorage.setItem(K, n); }catch(e){}
-    paint();
-  });
-})();
-</script>
