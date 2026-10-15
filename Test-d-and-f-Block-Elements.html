@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISC Chemistry &#8212; Test on the d- and f-Block Elements (37 marks)</title>
+<style>
+:root{
+  --bg:#EFF2F0; --surface:#FFFFFF; --surface-2:#F6F9F8;
+  --ink:#16211E; --muted:#5C6B67; --rule:#D3DBD8; --rule-strong:#9FAEA9;
+  --accent:#0F6E63; --accent-soft:#DDEEEB; --accent-ink:#0B4F47;
+  --ok:#16794C; --ok-soft:#DEF0E6; --bad:#B0271C; --bad-soft:#FAE3E0;
+  --warn:#A86400; --warn-soft:#FBF0DC; --warn-ink:#6B4409;
+  --shadow:0 1px 2px rgba(22,33,30,.05), 0 10px 28px -20px rgba(22,33,30,.4);
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,"Times New Roman",serif;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.6}
+sub,sup{line-height:0;font-size:74%}
+sup{vertical-align:.45em} sub{vertical-align:-.22em}
+b,strong{font-weight:650}
+.wrap{max-width:50rem;margin:0 auto;padding:0 1.15rem 4rem}
+.hide{display:none !important}
+
+header.mast{border-bottom:1px solid var(--rule);background:var(--surface);
+  margin-bottom:1.4rem}
+header.mast .inner{max-width:50rem;margin:0 auto;padding:1.9rem 1.15rem 1.5rem}
+.kicker{font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 .4rem}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,4vw,2.15rem);
+  line-height:1.14;margin:0 0 .4rem;letter-spacing:-.012em}
+header.mast p.sub{margin:0;color:var(--muted);font-size:.95rem;max-width:60ch}
+header.mast a.back{font-size:.78rem;color:var(--muted);text-decoration:none;
+  display:inline-block;margin-bottom:.6rem}
+header.mast a.back:hover{color:var(--accent)}
+
+/* ---------------- instructions gate ---------------- */
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);padding:1.5rem 1.6rem}
+.card h2{font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:0 0 .8rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(8rem,1fr));gap:.55rem;
+  margin:0 0 1.2rem}
+.fact{border:1px solid var(--rule);border-radius:3px;background:var(--surface-2);
+  padding:.55rem .7rem}
+.fact .k{font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;display:block}
+.fact .v{font-family:var(--serif);font-size:1.15rem;font-weight:600}
+ol.rules{margin:0 0 1.2rem;padding-left:1.3rem;font-size:.95rem}
+ol.rules li{margin-bottom:.4rem}
+.lockwarn{background:var(--bad-soft);border-left:3px solid var(--bad);border-radius:3px;
+  padding:.8rem 1rem;margin:0 0 1.2rem;font-size:.95rem}
+.lockwarn b:first-child{color:var(--bad)}
+.startbtn{font-family:var(--sans);font-size:.95rem;font-weight:650;color:#fff;
+  background:var(--accent);border:1px solid var(--accent);border-radius:3px;
+  padding:.7rem 1.6rem;cursor:pointer}
+.startbtn:hover{background:var(--accent-ink)}
+
+/* ---------------- the running paper ---------------- */
+.topbar{position:sticky;top:0;z-index:30;background:var(--surface);
+  border-bottom:1px solid var(--rule);margin-bottom:1rem;
+  box-shadow:0 2px 12px -8px rgba(22,33,30,.35)}
+.topbar .inner{max-width:50rem;margin:0 auto;padding:.55rem 1.15rem;display:flex;
+  align-items:center;gap:.8rem;flex-wrap:wrap}
+#clock{font-family:var(--mono);font-size:1.15rem;font-weight:700;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#clock.warn{color:var(--warn)} #clock.crit{color:var(--bad)}
+.clocklab{font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--muted);font-weight:700;display:block;line-height:1.2}
+#answered{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.topbar .spacer{flex:1 1 auto}
+#submitbtn{font-family:var(--sans);font-size:.82rem;font-weight:650;color:#fff;
+  background:var(--accent);border:1px solid var(--accent);border-radius:3px;
+  padding:.42rem 1rem;cursor:pointer}
+#submitbtn:hover{background:var(--accent-ink)}
+.livewarn{background:var(--warn-soft);border-left:3px solid var(--warn);
+  border-radius:3px;padding:.55rem .85rem;margin:0 0 1.2rem;font-size:.86rem;
+  color:var(--warn-ink)}
+.livewarn b{color:var(--warn-ink)}
+
+.qcard{background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);padding:1.1rem 1.3rem 1.2rem;margin:0 0 .9rem}
+.qhead{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem;
+  font-size:.72rem}
+.qno{background:var(--accent);color:#fff;font-weight:700;border-radius:2px;
+  padding:.14rem .45rem}
+.qch{border:1px solid var(--rule);border-radius:2px;padding:.11rem .45rem;
+  color:var(--muted);font-weight:600}
+.qmk{margin-left:auto;color:var(--muted);font-weight:600}
+.qtext{font-family:var(--serif);font-size:1.05rem;line-height:1.6;margin-bottom:.85rem}
+.opts{display:flex;flex-direction:column;gap:.4rem}
+.opt{display:flex;gap:.6rem;align-items:flex-start;border:1px solid var(--rule);
+  border-radius:3px;padding:.55rem .8rem;cursor:pointer;background:var(--surface-2);
+  transition:border-color .14s,background .14s}
+.opt:hover{border-color:var(--rule-strong)}
+.opt input{margin:.28rem 0 0;accent-color:var(--accent);flex:0 0 auto}
+.opt .lab{font-weight:700;color:var(--accent);flex:0 0 1.1rem}
+.opt .txt{flex:1 1 auto;font-size:.96rem}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.paper.locked .opt{cursor:default}
+
+.srcline{display:block;margin-top:8px;font-size:.82rem;color:#7a7a7a;font-style:italic}
+/* ---------------- the marked paper ---------------- */
+.scorecard{background:var(--surface);border:1px solid var(--accent);
+  border-left:3px solid var(--accent);border-radius:3px;box-shadow:var(--shadow);
+  padding:1.4rem 1.5rem;margin:0 0 1.2rem}
+.scorecard h2{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin:0 0 .2rem}
+.bigscore{font-family:var(--serif);font-size:2.8rem;font-weight:600;line-height:1.05;
+  color:var(--accent);margin:.4rem 0 .1rem}
+.bigscore span{font-size:1.3rem;color:var(--muted)}
+.pct{font-size:.95rem;color:var(--muted);margin-bottom:1rem}
+.why{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:3px;
+  padding:.6rem .9rem;margin:0 0 1rem;font-size:.9rem;color:var(--warn-ink)}
+.brk{width:100%;border-collapse:collapse;font-size:.9rem;margin-bottom:.4rem}
+.brk th,.brk td{border:1px solid var(--rule);padding:.35rem .6rem;text-align:center}
+.brk th{background:var(--surface-2);font-size:.72rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);font-weight:700}
+.brk td.l,.brk th.l{text-align:left}
+.brk tfoot td{font-weight:700;background:var(--surface-2)}
+.again{font-family:var(--sans);font-size:.8rem;font-weight:600;background:none;
+  border:1px solid var(--rule);border-radius:3px;padding:.4rem .9rem;
+  color:var(--muted);cursor:pointer;margin-top:.9rem}
+.again:hover{border-color:var(--bad);color:var(--bad)}
+
+.qcard.right{border-left:3px solid var(--ok)}
+.qcard.wrong{border-left:3px solid var(--bad)}
+.qcard.blank{border-left:3px solid var(--rule-strong)}
+.verdict{font-size:.76rem;font-weight:700;border-radius:2px;padding:.14rem .5rem}
+.verdict.ok{background:var(--ok-soft);color:var(--ok)}
+.verdict.no{background:var(--bad-soft);color:var(--bad)}
+.verdict.bl{background:var(--surface-2);color:var(--muted)}
+.opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+.opt.chosen-wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt .tag{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  white-space:nowrap;align-self:center}
+.opt.correct .tag{color:var(--ok)}
+.opt.chosen-wrong .tag{color:var(--bad)}
+.expl{margin-top:.9rem;padding-top:.8rem;border-top:1px solid var(--rule);
+  font-size:.95rem;line-height:1.62}
+.expl .lab{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);font-weight:700;display:block;margin-bottom:.25rem}
+
+footer.foot{max-width:50rem;margin:0 auto;padding:1.6rem 1.15rem 2.5rem;
+  font-size:.78rem;color:var(--muted);line-height:1.65}
+footer.foot .rule{height:1px;background:var(--rule);margin-bottom:1rem}
+@media print{ .topbar,.startbtn,#submitbtn,.again{display:none !important} }
+</style>
+
+<header class="mast"><div class="inner">
+  <a class="back" href="index.html">&#8249; ISC Chemistry</a>
+  <p class="kicker">ISC Class 12 &middot; Chemistry &middot; Unit 4</p>
+  <h1>Test on the d- and f-Block Elements</h1>
+  <p class="sub">Every one of the 37 numbered items on the school note sheet for Unit 4, set as a one-mark objective question in the sheet's own order. One and a half minutes a question, rounded up to the half hour. 37 multiple-choice questions,
+  1 mark each, 37 marks in 60 minutes.</p>
+</div></header>
+
+<div class="wrap">
+
+<!-- ============================ instructions ============================ -->
+<div id="gate">
+  <div class="card">
+    <h2>Before you begin</h2>
+    <div class="facts">
+      <div class="fact"><span class="k">Marks</span><span class="v">37</span></div>
+      <div class="fact"><span class="k">Time</span><span class="v">1 hour</span></div>
+      <div class="fact"><span class="k">Questions</span><span class="v">37</span></div>
+      <div class="fact"><span class="k">Each</span><span class="v">1 mark</span></div>
+    </div>
+
+    <div class="lockwarn"><b>The paper locks once you start.</b> If you close this
+      tab, reload the page or navigate away before submitting, <b>the paper is
+      submitted automatically</b> with the answers you have given so far. There is no
+      way back into a paper in progress &mdash; treat it as an examination hall.</div>
+
+    <ol class="rules">
+      <li>All 37 questions are compulsory. Each carries <b>1 mark</b>, and
+        there is <b>no negative marking</b> &mdash; a wrong answer scores zero, so
+        never leave a question blank.</li>
+      <li>Exactly one option is correct. You may change an answer freely until you
+        submit; nothing is marked before then.</li>
+      <li>The clock starts the moment you press <i>Start</i> and runs for
+        <b>60 minutes</b> (1 hour). When it reaches zero the paper submits
+        itself.</li>
+      <li>Your answers are saved as you go, so a crash will not lose them &mdash; but
+        reopening the page will show you the marked paper, not the paper again.</li>
+      <li>After submitting you will see your marks, a chapter-by-chapter breakdown,
+        and a worked explanation for every question.</li>
+      <li>Coverage: Why they are transition elements <b>9</b> &middot; Oxidation states and electrode potentials <b>13</b> &middot; Colour, magnetism and characteristic properties <b>11</b> &middot; The f-block: lanthanoids and actinoids <b>4</b>.</li>
+    </ol>
+
+    <button class="startbtn" id="startbtn" type="button">Start the paper</button>
+  </div>
+</div>
+
+<!-- ============================ the paper ============================ -->
+<div id="paper" class="hide paper">
+  <div class="topbar"><div class="inner">
+    <div><span class="clocklab">Time left</span><span id="clock">--:--</span></div>
+    <span id="answered"></span>
+    <span class="spacer"></span>
+    <button id="submitbtn" type="button">Submit paper</button>
+  </div></div>
+  <div class="livewarn"><b>Do not close or reload this page.</b> Leaving it submits
+    your paper.</div>
+</div>
+
+<!-- ============================ the marked paper ============================ -->
+<div id="result" class="hide">
+  <div class="scorecard">
+    <h2>Your result</h2>
+    <div class="bigscore" id="score"></div>
+    <div class="pct" id="pct"></div>
+    <div class="why hide" id="why"></div>
+    <table class="brk">
+      <thead><tr><th class="l">Chapter</th><th>Correct</th><th>Marks</th></tr></thead>
+      <tbody id="brkbody"></tbody>
+      <tfoot id="brkfoot"></tfoot>
+    </table>
+    <button class="again" id="again" type="button">Clear this attempt and sit the
+      paper again</button>
+  </div>
+  <p class="livewarn" style="background:var(--accent-soft);border-color:var(--accent);
+    color:var(--accent-ink)"><b>Every question is worked below</b> &mdash; your answer,
+    the correct one, and why.</p>
+</div>
+
+<!-- the questions themselves live once and are used by both states -->
+<div id="questions" class="hide">
+<section class="qcard" id="c0"><div class="qhead"><span class="qno">Q1</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v0"></span><span class="qmk">1 mark</span></div><div class="qtext">A d-block element is classed as a <b>transition element</b> because it has:</div><div class="opts"><label class="opt" for="q0o0"><input type="radio" id="q0o0" name="q0" value="0"><span class="lab">A</span><span class="txt">an incompletely filled d subshell, either as the neutral atom or in its most stable oxidation state</span><span class="tag"></span></label><label class="opt" for="q0o1"><input type="radio" id="q0o1" name="q0" value="1"><span class="lab">B</span><span class="txt">a completely filled d subshell in every oxidation state</span><span class="tag"></span></label><label class="opt" for="q0o2"><input type="radio" id="q0o2" name="q0" value="2"><span class="lab">C</span><span class="txt">an incompletely filled f subshell</span><span class="tag"></span></label><label class="opt" for="q0o3"><input type="radio" id="q0o3" name="q0" value="3"><span class="lab">D</span><span class="txt">its valence electrons in the ns orbital only</span><span class="tag"></span></label></div><div class="expl hide" id="e0"><span class="lab">Explanation</span>The definition turns on the d subshell being <b>partly</b> filled. It is enough for this to be true of the neutral atom <i>or</i> of a common oxidation state &mdash; which is why scandium counts even though Sc<sup>3+</sup> is d<sup>0</sup>.<span class="srcline">Source &middot; Note 1</span></div></section>
+<section class="qcard" id="c1"><div class="qhead"><span class="qno">Q2</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v1"></span><span class="qmk">1 mark</span></div><div class="qtext">Zinc, cadmium and mercury sit in the d block but are <b>not</b> regarded as transition elements because:</div><div class="opts"><label class="opt" for="q1o0"><input type="radio" id="q1o0" name="q1" value="0"><span class="lab">A</span><span class="txt">they belong to the f block</span><span class="tag"></span></label><label class="opt" for="q1o1"><input type="radio" id="q1o1" name="q1" value="1"><span class="lab">B</span><span class="txt">their d subshell is completely filled both as the free atom and in the stable +2 state</span><span class="tag"></span></label><label class="opt" for="q1o2"><input type="radio" id="q1o2" name="q1" value="2"><span class="lab">C</span><span class="txt">they have no d electrons at all</span><span class="tag"></span></label><label class="opt" for="q1o3"><input type="radio" id="q1o3" name="q1" value="3"><span class="lab">D</span><span class="txt">their d subshell is only half filled</span><span class="tag"></span></label></div><div class="expl hide" id="e1"><span class="lab">Explanation</span>All three are d<sup>10</sup> as the atom and d<sup>10</sup> as M<sup>2+</sup>. Nothing is left partly filled in either, so the definition in item 1 is never satisfied.<span class="srcline">Source &middot; Note 2</span></div></section>
+<section class="qcard" id="c2"><div class="qhead"><span class="qno">Q3</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v2"></span><span class="qmk">1 mark</span></div><div class="qtext">Sc<sup>3+</sup> has a d<sup>0</sup> configuration, yet scandium is counted as a transition metal. Why?</div><div class="opts"><label class="opt" for="q2o0"><input type="radio" id="q2o0" name="q2" value="0"><span class="lab">A</span><span class="txt">scandium shows several oxidation states</span><span class="tag"></span></label><label class="opt" for="q2o1"><input type="radio" id="q2o1" name="q2" value="1"><span class="lab">B</span><span class="txt">Sc<sup>3+</sup> is paramagnetic</span><span class="tag"></span></label><label class="opt" for="q2o2"><input type="radio" id="q2o2" name="q2" value="2"><span class="lab">C</span><span class="txt">the neutral atom has a partly filled 3d<sup>1</sup> configuration</span><span class="tag"></span></label><label class="opt" for="q2o3"><input type="radio" id="q2o3" name="q2" value="3"><span class="lab">D</span><span class="txt">Sc<sup>3+</sup> is strongly coloured in solution</span><span class="tag"></span></label></div><div class="expl hide" id="e2"><span class="lab">Explanation</span>The definition allows either the atom or a stable ion to carry the partly filled d subshell. Scandium qualifies on the <b>atom</b>, which is 3d<sup>1</sup>4s<sup>2</sup>. Its only common ion is d<sup>0</sup>, so it is colourless and diamagnetic.<span class="srcline">Source &middot; Note 3</span></div></section>
+<section class="qcard" id="c3"><div class="qhead"><span class="qno">Q4</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v3"></span><span class="qmk">1 mark</span></div><div class="qtext">The atomic radii of the first transition series fall at first and then change very little. The reason is:</div><div class="opts"><label class="opt" for="q3o0"><input type="radio" id="q3o0" name="q3" value="0"><span class="lab">A</span><span class="txt">the effective nuclear charge falls across the series</span><span class="tag"></span></label><label class="opt" for="q3o1"><input type="radio" id="q3o1" name="q3" value="1"><span class="lab">B</span><span class="txt">each added electron enters a new shell</span><span class="tag"></span></label><label class="opt" for="q3o2"><input type="radio" id="q3o2" name="q3" value="2"><span class="lab">C</span><span class="txt">the 4s orbital contracts sharply across the series</span><span class="tag"></span></label><label class="opt" for="q3o3"><input type="radio" id="q3o3" name="q3" value="3"><span class="lab">D</span><span class="txt">the added 3d electrons screen the nucleus, largely offsetting the rise in effective nuclear charge</span><span class="tag"></span></label></div><div class="expl hide" id="e3"><span class="lab">Explanation</span>Electrons are being added to an <b>inner</b> 3d subshell while the outermost shell stays 4s. The shielding those 3d electrons provide roughly cancels the extra nuclear charge, so after the first few elements the radius is nearly constant.<span class="srcline">Source &middot; Note 4</span></div></section>
+<section class="qcard" id="c4"><div class="qhead"><span class="qno">Q5</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v4"></span><span class="qmk">1 mark</span></div><div class="qtext">Zirconium and hafnium have almost identical atomic radii because of:</div><div class="opts"><label class="opt" for="q4o0"><input type="radio" id="q4o0" name="q4" value="0"><span class="lab">A</span><span class="txt">lanthanoid contraction</span><span class="tag"></span></label><label class="opt" for="q4o1"><input type="radio" id="q4o1" name="q4" value="1"><span class="lab">B</span><span class="txt">actinoid contraction</span><span class="tag"></span></label><label class="opt" for="q4o2"><input type="radio" id="q4o2" name="q4" value="2"><span class="lab">C</span><span class="txt">their identical atomic numbers</span><span class="tag"></span></label><label class="opt" for="q4o3"><input type="radio" id="q4o3" name="q4" value="3"><span class="lab">D</span><span class="txt">the inert pair effect</span><span class="tag"></span></label></div><div class="expl hide" id="e4"><span class="lab">Explanation</span>The fourteen lanthanoids come between them. The steady contraction across that series cancels the increase in size expected on going from the second to the third transition series, so Zr and Hf &mdash; and Nb/Ta, Mo/W &mdash; are nearly the same size and very hard to separate.<span class="srcline">Source &middot; Note 5</span></div></section>
+<section class="qcard" id="c5"><div class="qhead"><span class="qno">Q6</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v5"></span><span class="qmk">1 mark</span></div><div class="qtext">Ionisation enthalpies across the first transition series rise <b>irregularly</b> rather than smoothly because:</div><div class="opts"><label class="opt" for="q5o0"><input type="radio" id="q5o0" name="q5" value="0"><span class="lab">A</span><span class="txt">the atomic radius increases steadily across the series</span><span class="tag"></span></label><label class="opt" for="q5o1"><input type="radio" id="q5o1" name="q5" value="1"><span class="lab">B</span><span class="txt">the exchange energy of the d configuration left after ionisation differs from element to element</span><span class="tag"></span></label><label class="opt" for="q5o2"><input type="radio" id="q5o2" name="q5" value="2"><span class="lab">C</span><span class="txt">the nuclear charge falls at several points in the series</span><span class="tag"></span></label><label class="opt" for="q5o3"><input type="radio" id="q5o3" name="q5" value="3"><span class="lab">D</span><span class="txt">the 4s orbital is removed before the 3d in only some elements</span><span class="tag"></span></label></div><div class="expl hide" id="e5"><span class="lab">Explanation</span>Half-filled and fully-filled d configurations are extra stable because of exchange energy, so the energy needed to reach them &mdash; or to break them &mdash; varies from element to element. <i>The note sheet writes &lsquo;exchange of energy between d and f orbitals&rsquo;; there are no f electrons in the first series, so read that as exchange energy within the d subshell.</i><span class="srcline">Source &middot; Note 6</span></div></section>
+<section class="qcard" id="c6"><div class="qhead"><span class="qno">Q7</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v6"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals have strong metallic bonding, high enthalpies of atomisation and high melting points because of:</div><div class="opts"><label class="opt" for="q6o0"><input type="radio" id="q6o0" name="q6" value="0"><span class="lab">A</span><span class="txt">completely filled d orbitals</span><span class="tag"></span></label><label class="opt" for="q6o1"><input type="radio" id="q6o1" name="q6" value="1"><span class="lab">B</span><span class="txt">the absence of free electrons</span><span class="tag"></span></label><label class="opt" for="q6o2"><input type="radio" id="q6o2" name="q6" value="2"><span class="lab">C</span><span class="txt">unpaired d electrons taking part in the metallic bonding</span><span class="tag"></span></label><label class="opt" for="q6o3"><input type="radio" id="q6o3" name="q6" value="3"><span class="lab">D</span><span class="txt">their large atomic radii</span><span class="tag"></span></label></div><div class="expl hide" id="e6"><span class="lab">Explanation</span>The more unpaired d electrons available for bonding, the stronger the metallic bond. That is why enthalpy of atomisation peaks near the middle of each series, where the number of unpaired electrons is greatest.<span class="srcline">Source &middot; Note 7</span></div></section>
+<section class="qcard" id="c7"><div class="qhead"><span class="qno">Q8</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v7"></span><span class="qmk">1 mark</span></div><div class="qtext">Zinc, cadmium and mercury are soft and melt at low temperatures because:</div><div class="opts"><label class="opt" for="q7o0"><input type="radio" id="q7o0" name="q7" value="0"><span class="lab">A</span><span class="txt">they have the largest atomic radii in the d block</span><span class="tag"></span></label><label class="opt" for="q7o1"><input type="radio" id="q7o1" name="q7" value="1"><span class="lab">B</span><span class="txt">they have the greatest number of unpaired electrons</span><span class="tag"></span></label><label class="opt" for="q7o2"><input type="radio" id="q7o2" name="q7" value="2"><span class="lab">C</span><span class="txt">they form interstitial compounds readily</span><span class="tag"></span></label><label class="opt" for="q7o3"><input type="radio" id="q7o3" name="q7" value="3"><span class="lab">D</span><span class="txt">all their d electrons are paired, so the metallic bond is very weak</span><span class="tag"></span></label></div><div class="expl hide" id="e7"><span class="lab">Explanation</span>With a full d<sup>10</sup> subshell there are no unpaired electrons to contribute to metallic bonding. Their enthalpies of atomisation are the lowest in the series &mdash; mercury is liquid at room temperature.<span class="srcline">Source &middot; Note 8</span></div></section>
+<section class="qcard" id="c8"><div class="qhead"><span class="qno">Q9</span><span class="qch">Why they are transition elements</span><span class="verdict hide" id="v8"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition elements show a large number of oxidation states because:</div><div class="opts"><label class="opt" for="q8o0"><input type="radio" id="q8o0" name="q8" value="0"><span class="lab">A</span><span class="txt">the (n&minus;1)d and ns orbitals are close in energy, so both sets of electrons can be used in bonding</span><span class="tag"></span></label><label class="opt" for="q8o1"><input type="radio" id="q8o1" name="q8" value="1"><span class="lab">B</span><span class="txt">they have completely filled d orbitals</span><span class="tag"></span></label><label class="opt" for="q8o2"><input type="radio" id="q8o2" name="q8" value="2"><span class="lab">C</span><span class="txt">they have very low ionisation enthalpies</span><span class="tag"></span></label><label class="opt" for="q8o3"><input type="radio" id="q8o3" name="q8" value="3"><span class="lab">D</span><span class="txt">only the ns electrons are ever removed</span><span class="tag"></span></label></div><div class="expl hide" id="e8"><span class="lab">Explanation</span>The energy gap between (n&minus;1)d and ns is small, so after the ns electrons are lost the d electrons can be lost one at a time. That gives a run of oxidation states differing by one &mdash; unlike the p block, where they usually differ by two.<span class="srcline">Source &middot; Note 9</span></div></section>
+<section class="qcard" id="c9"><div class="qhead"><span class="qno">Q10</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v9"></span><span class="qmk">1 mark</span></div><div class="qtext">Which element of the first transition series shows the <b>greatest number</b> of oxidation states, and why?</div><div class="opts"><label class="opt" for="q9o0"><input type="radio" id="q9o0" name="q9" value="0"><span class="lab">A</span><span class="txt">Cu, because it has a 3d<sup>10</sup> ion</span><span class="tag"></span></label><label class="opt" for="q9o1"><input type="radio" id="q9o1" name="q9" value="1"><span class="lab">B</span><span class="txt">Mn, because it has the largest number of unpaired d electrons</span><span class="tag"></span></label><label class="opt" for="q9o2"><input type="radio" id="q9o2" name="q9" value="2"><span class="lab">C</span><span class="txt">Sc, because it readily reaches a noble gas configuration</span><span class="tag"></span></label><label class="opt" for="q9o3"><input type="radio" id="q9o3" name="q9" value="3"><span class="lab">D</span><span class="txt">Zn, because its d subshell is full</span><span class="tag"></span></label></div><div class="expl hide" id="e9"><span class="lab">Explanation</span>Manganese is 3d<sup>5</sup>4s<sup>2</sup> &mdash; five unpaired d electrons plus two 4s. Every one can be used, giving oxidation states from +2 right through to +7, the maximum for the series.<span class="srcline">Source &middot; Note 10</span></div></section>
+<section class="qcard" id="c10"><div class="qhead"><span class="qno">Q11</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v10"></span><span class="qmk">1 mark</span></div><div class="qtext">Which element of the first transition series does <b>not</b> show variable oxidation states, and why?</div><div class="opts"><label class="opt" for="q10o0"><input type="radio" id="q10o0" name="q10" value="0"><span class="lab">A</span><span class="txt">Fe, because it prefers the +3 state</span><span class="tag"></span></label><label class="opt" for="q10o1"><input type="radio" id="q10o1" name="q10" value="1"><span class="lab">B</span><span class="txt">Cr, because of its half-filled d subshell</span><span class="tag"></span></label><label class="opt" for="q10o2"><input type="radio" id="q10o2" name="q10" value="2"><span class="lab">C</span><span class="txt">Sc, because losing three electrons gives the noble gas configuration of argon</span><span class="tag"></span></label><label class="opt" for="q10o3"><input type="radio" id="q10o3" name="q10" value="3"><span class="lab">D</span><span class="txt">Mn, because it has five unpaired electrons</span><span class="tag"></span></label></div><div class="expl hide" id="e10"><span class="lab">Explanation</span>Scandium is 3d<sup>1</sup>4s<sup>2</sup>. Losing all three leaves [Ar], which is so stable that +3 is effectively its only oxidation state.<span class="srcline">Source &middot; Note 11</span></div></section>
+<section class="qcard" id="c11"><div class="qhead"><span class="qno">Q12</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v11"></span><span class="qmk">1 mark</span></div><div class="qtext">Cr<sup>3+</sup> is more stable than Cr<sup>2+</sup> because:</div><div class="opts"><label class="opt" for="q11o0"><input type="radio" id="q11o0" name="q11" value="0"><span class="lab">A</span><span class="txt">Cr<sup>3+</sup> has a completely filled d subshell</span><span class="tag"></span></label><label class="opt" for="q11o1"><input type="radio" id="q11o1" name="q11" value="1"><span class="lab">B</span><span class="txt">Cr<sup>2+</sup> is d<sup>0</sup></span><span class="tag"></span></label><label class="opt" for="q11o2"><input type="radio" id="q11o2" name="q11" value="2"><span class="lab">C</span><span class="txt">Cr<sup>3+</sup> has a larger ionic radius</span><span class="tag"></span></label><label class="opt" for="q11o3"><input type="radio" id="q11o3" name="q11" value="3"><span class="lab">D</span><span class="txt">Cr<sup>3+</sup> is d<sup>3</sup>, a stable half-filled t<sub>2g</sub><sup>3</sup> set</span><span class="tag"></span></label></div><div class="expl hide" id="e11"><span class="lab">Explanation</span>In an octahedral field the d<sup>3</sup> ion puts one electron in each of the three t<sub>2g</sub> orbitals &mdash; a half-filled set with maximum exchange energy. Cr<sup>2+</sup> is therefore a good reducing agent, losing an electron to reach it.<span class="srcline">Source &middot; Note 12</span></div></section>
+<section class="qcard" id="c12"><div class="qhead"><span class="qno">Q13</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v12"></span><span class="qmk">1 mark</span></div><div class="qtext">In aqueous solution Cu<sup>2+</sup> is more stable than Cu<sup>+</sup> because:</div><div class="opts"><label class="opt" for="q12o0"><input type="radio" id="q12o0" name="q12" value="0"><span class="lab">A</span><span class="txt">the much greater hydration enthalpy of Cu<sup>2+</sup> more than pays for the second ionisation enthalpy</span><span class="tag"></span></label><label class="opt" for="q12o1"><input type="radio" id="q12o1" name="q12" value="1"><span class="lab">B</span><span class="txt">Cu<sup>+</sup> has an incomplete d subshell</span><span class="tag"></span></label><label class="opt" for="q12o2"><input type="radio" id="q12o2" name="q12" value="2"><span class="lab">C</span><span class="txt">Cu<sup>2+</sup> is d<sup>10</sup></span><span class="tag"></span></label><label class="opt" for="q12o3"><input type="radio" id="q12o3" name="q12" value="3"><span class="lab">D</span><span class="txt">Cu<sup>+</sup> is strongly coloured</span><span class="tag"></span></label></div><div class="expl hide" id="e12"><span class="lab">Explanation</span>Cu<sup>+</sup> is d<sup>10</sup> and looks the more stable configuration &mdash; and in the <b>gas phase</b> it is. In water the smaller, doubly charged Cu<sup>2+</sup> is hydrated far more strongly, and that releases more than enough energy to remove the second electron. Cu<sup>+</sup> therefore disproportionates in solution.<span class="srcline">Source &middot; Note 13</span></div></section>
+<section class="qcard" id="c13"><div class="qhead"><span class="qno">Q14</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v13"></span><span class="qmk">1 mark</span></div><div class="qtext">Which first-series transition metal shows a <b>+1</b> oxidation state, and why?</div><div class="opts"><label class="opt" for="q13o0"><input type="radio" id="q13o0" name="q13" value="0"><span class="lab">A</span><span class="txt">Zn, because its d subshell is already full</span><span class="tag"></span></label><label class="opt" for="q13o1"><input type="radio" id="q13o1" name="q13" value="1"><span class="lab">B</span><span class="txt">Cu, because Cu<sup>+</sup> has the stable full 3d<sup>10</sup> configuration</span><span class="tag"></span></label><label class="opt" for="q13o2"><input type="radio" id="q13o2" name="q13" value="2"><span class="lab">C</span><span class="txt">Sc, because +1 gives a noble gas core</span><span class="tag"></span></label><label class="opt" for="q13o3"><input type="radio" id="q13o3" name="q13" value="3"><span class="lab">D</span><span class="txt">Mn, because it has five unpaired electrons</span><span class="tag"></span></label></div><div class="expl hide" id="e13"><span class="lab">Explanation</span>Losing the single 4s electron leaves copper as 3d<sup>10</sup>. The state is well known in the gaseous phase and in insoluble or complexed compounds such as CuCl and [Cu(NH<sub>3</sub>)<sub>2</sub>]<sup>+</sup>, though it disproportionates in water (item 13).<span class="srcline">Source &middot; Note 14</span></div></section>
+<section class="qcard" id="c14"><div class="qhead"><span class="qno">Q15</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v14"></span><span class="qmk">1 mark</span></div><div class="qtext">The highest oxidation states of the transition metals are met with in their <b>oxides and fluorides</b> because:</div><div class="opts"><label class="opt" for="q14o0"><input type="radio" id="q14o0" name="q14" value="0"><span class="lab">A</span><span class="txt">oxygen and fluorine are the largest ligand atoms</span><span class="tag"></span></label><label class="opt" for="q14o1"><input type="radio" id="q14o1" name="q14" value="1"><span class="lab">B</span><span class="txt">oxygen and fluorine are easily oxidised</span><span class="tag"></span></label><label class="opt" for="q14o2"><input type="radio" id="q14o2" name="q14" value="2"><span class="lab">C</span><span class="txt">oxygen and fluorine are the most electronegative elements and can stabilise a metal in a high oxidation state</span><span class="tag"></span></label><label class="opt" for="q14o3"><input type="radio" id="q14o3" name="q14" value="3"><span class="lab">D</span><span class="txt">oxides and fluorides are always ionic</span><span class="tag"></span></label></div><div class="expl hide" id="e14"><span class="lab">Explanation</span>A metal in a high oxidation state is strongly oxidising; only the most electronegative, least easily oxidised partners can survive beside it. Hence OsO<sub>4</sub>, Mn<sub>2</sub>O<sub>7</sub> and CrF<sub>6</sub>.<span class="srcline">Source &middot; Note 15</span></div></section>
+<section class="qcard" id="c15"><div class="qhead"><span class="qno">Q16</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v15"></span><span class="qmk">1 mark</span></div><div class="qtext">Why are the very highest oxidation states more common in the <b>oxides</b> than in the fluorides of transition metals?</div><div class="opts"><label class="opt" for="q15o0"><input type="radio" id="q15o0" name="q15" value="0"><span class="lab">A</span><span class="txt">oxygen is more electronegative than fluorine</span><span class="tag"></span></label><label class="opt" for="q15o1"><input type="radio" id="q15o1" name="q15" value="1"><span class="lab">B</span><span class="txt">oxygen is larger than fluorine</span><span class="tag"></span></label><label class="opt" for="q15o2"><input type="radio" id="q15o2" name="q15" value="2"><span class="lab">C</span><span class="txt">oxides are always more ionic than fluorides</span><span class="tag"></span></label><label class="opt" for="q15o3"><input type="radio" id="q15o3" name="q15" value="3"><span class="lab">D</span><span class="txt">oxygen can also form d&pi;&ndash;p&pi; multiple bonds to the metal, which fluorine cannot</span><span class="tag"></span></label></div><div class="expl hide" id="e15"><span class="lab">Explanation</span>Fluorine forms only a single bond, so a high oxidation state needs a large number of fluorine atoms round the metal and the structure becomes crowded. Oxygen can donate a lone pair into an empty metal d orbital as well, forming a d&pi;&ndash;p&pi; bond, so one oxygen does the work of two fluorines. <i>Note fluorine is in fact the more electronegative; the multiple bonding, not electronegativity, is the reason.</i><span class="srcline">Source &middot; Note 16</span></div></section>
+<section class="qcard" id="c16"><div class="qhead"><span class="qno">Q17</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v16"></span><span class="qmk">1 mark</span></div><div class="qtext">Across the first transition series from left to right the <b>+2</b> oxidation state becomes increasingly stable because:</div><div class="opts"><label class="opt" for="q16o0"><input type="radio" id="q16o0" name="q16" value="0"><span class="lab">A</span><span class="txt">the number of d electrons available for bonding in higher states falls as the subshell fills</span><span class="tag"></span></label><label class="opt" for="q16o1"><input type="radio" id="q16o1" name="q16" value="1"><span class="lab">B</span><span class="txt">the atomic radius increases sharply</span><span class="tag"></span></label><label class="opt" for="q16o2"><input type="radio" id="q16o2" name="q16" value="2"><span class="lab">C</span><span class="txt">the effective nuclear charge decreases</span><span class="tag"></span></label><label class="opt" for="q16o3"><input type="radio" id="q16o3" name="q16" value="3"><span class="lab">D</span><span class="txt">the 4s orbital rises in energy above the 3d</span><span class="tag"></span></label></div><div class="expl hide" id="e16"><span class="lab">Explanation</span>Early in the series the d electrons are readily used, so high oxidation states are common. As the subshell fills they become more tightly held and less available, until near the end only the two 4s electrons are easily lost and +2 dominates.<span class="srcline">Source &middot; Note 17</span></div></section>
+<section class="qcard" id="c17"><div class="qhead"><span class="qno">Q18</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v17"></span><span class="qmk">1 mark</span></div><div class="qtext">In which of these oxoanions is the oxidation number of the metal <b>not</b> equal to its group number?</div><div class="opts"><label class="opt" for="q17o0"><input type="radio" id="q17o0" name="q17" value="0"><span class="lab">A</span><span class="txt">VO<sub>3</sub><sup>&minus;</sup></span><span class="tag"></span></label><label class="opt" for="q17o1"><input type="radio" id="q17o1" name="q17" value="1"><span class="lab">B</span><span class="txt">MnO<sub>4</sub><sup>2&minus;</sup></span><span class="tag"></span></label><label class="opt" for="q17o2"><input type="radio" id="q17o2" name="q17" value="2"><span class="lab">C</span><span class="txt">MnO<sub>4</sub><sup>&minus;</sup></span><span class="tag"></span></label><label class="opt" for="q17o3"><input type="radio" id="q17o3" name="q17" value="3"><span class="lab">D</span><span class="txt">Cr<sub>2</sub>O<sub>7</sub><sup>2&minus;</sup></span><span class="tag"></span></label></div><div class="expl hide" id="e17"><span class="lab">Explanation</span>Manganese is in group 7. In the manganate ion MnO<sub>4</sub><sup>2&minus;</sup> it is <b>+6</b>, one short. In permanganate it is +7, in dichromate chromium is +6 (group 6) and in the metavanadate ion vanadium is +5 (group 5) &mdash; all three match their group.<span class="srcline">Source &middot; Note 18</span></div></section>
+<section class="qcard" id="c18"><div class="qhead"><span class="qno">Q19</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v18"></span><span class="qmk">1 mark</span></div><div class="qtext">Across the first series E&deg;(M<sup>2+</sup>/M) becomes less negative, but irregularly. The irregularity is due to:</div><div class="opts"><label class="opt" for="q18o0"><input type="radio" id="q18o0" name="q18" value="0"><span class="lab">A</span><span class="txt">a steady rise in enthalpy of atomisation</span><span class="tag"></span></label><label class="opt" for="q18o1"><input type="radio" id="q18o1" name="q18" value="1"><span class="lab">B</span><span class="txt">the increasing atomic radius</span><span class="tag"></span></label><label class="opt" for="q18o2"><input type="radio" id="q18o2" name="q18" value="2"><span class="lab">C</span><span class="txt">the irregular variation of the sum of the first and second ionisation enthalpies</span><span class="tag"></span></label><label class="opt" for="q18o3"><input type="radio" id="q18o3" name="q18" value="3"><span class="lab">D</span><span class="txt">a steady fall in hydration enthalpy</span><span class="tag"></span></label></div><div class="expl hide" id="e18"><span class="lab">Explanation</span>The electrode potential is set by enthalpy of atomisation, IE<sub>1</sub> + IE<sub>2</sub>, and hydration enthalpy together. The ionisation term is the one that varies irregularly &mdash; for the same exchange-energy reasons as item 6 &mdash; and it carries the irregularity into E&deg;.<span class="srcline">Source &middot; Note 19</span></div></section>
+<section class="qcard" id="c19"><div class="qhead"><span class="qno">Q20</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v19"></span><span class="qmk">1 mark</span></div><div class="qtext">E&deg;(Cu<sup>2+</sup>/Cu) is <b>positive</b>, +0&middot;34 V, unlike the rest of the first series. Why?</div><div class="opts"><label class="opt" for="q19o0"><input type="radio" id="q19o0" name="q19" value="0"><span class="lab">A</span><span class="txt">copper has the lowest ionisation enthalpy in the series</span><span class="tag"></span></label><label class="opt" for="q19o1"><input type="radio" id="q19o1" name="q19" value="1"><span class="lab">B</span><span class="txt">copper has a very low enthalpy of atomisation</span><span class="tag"></span></label><label class="opt" for="q19o2"><input type="radio" id="q19o2" name="q19" value="2"><span class="lab">C</span><span class="txt">Cu<sup>2+</sup> has an exceptionally large hydration enthalpy</span><span class="tag"></span></label><label class="opt" for="q19o3"><input type="radio" id="q19o3" name="q19" value="3"><span class="lab">D</span><span class="txt">the hydration enthalpy of Cu<sup>2+</sup> is not large enough to pay for the high enthalpy of atomisation and ionisation of copper</span><span class="tag"></span></label></div><div class="expl hide" id="e19"><span class="lab">Explanation</span>For every other metal in the series the energy released on hydrating M<sup>2+</sup> outweighs what it costs to atomise and ionise the metal, so E&deg; is negative and the metal displaces hydrogen. For copper the sum &Delta;<sub>sub</sub>H + IE<sub>1</sub> + IE<sub>2</sub> is unusually high and is not repaid, so copper does <b>not</b> liberate hydrogen from acids.<span class="srcline">Source &middot; Note 20</span></div></section>
+<section class="qcard" id="c20"><div class="qhead"><span class="qno">Q21</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v20"></span><span class="qmk">1 mark</span></div><div class="qtext">E&deg;(Mn<sup>3+</sup>/Mn<sup>2+</sup>) is strongly <b>positive</b>, so Mn<sup>3+</sup> is a powerful oxidising agent. Why?</div><div class="opts"><label class="opt" for="q20o0"><input type="radio" id="q20o0" name="q20" value="0"><span class="lab">A</span><span class="txt">reduction to Mn<sup>2+</sup> gives the stable half-filled d<sup>5</sup> configuration</span><span class="tag"></span></label><label class="opt" for="q20o1"><input type="radio" id="q20o1" name="q20" value="1"><span class="lab">B</span><span class="txt">Mn<sup>3+</sup> has a half-filled d subshell</span><span class="tag"></span></label><label class="opt" for="q20o2"><input type="radio" id="q20o2" name="q20" value="2"><span class="lab">C</span><span class="txt">Mn<sup>2+</sup> is d<sup>0</sup></span><span class="tag"></span></label><label class="opt" for="q20o3"><input type="radio" id="q20o3" name="q20" value="3"><span class="lab">D</span><span class="txt">Mn<sup>3+</sup> is larger than Mn<sup>2+</sup></span><span class="tag"></span></label></div><div class="expl hide" id="e20"><span class="lab">Explanation</span>Mn<sup>3+</sup> is d<sup>4</sup>. Gaining one electron takes it to d<sup>5</sup>, half filled and extra stable, so the reduction is very favourable.<span class="srcline">Source &middot; Note 21</span></div></section>
+<section class="qcard" id="c21"><div class="qhead"><span class="qno">Q22</span><span class="qch">Oxidation states and electrode potentials</span><span class="verdict hide" id="v21"></span><span class="qmk">1 mark</span></div><div class="qtext">E&deg;(Cr<sup>3+</sup>/Cr<sup>2+</sup>) is <b>negative</b>, so Cr<sup>2+</sup> is a reducing agent. Why?</div><div class="opts"><label class="opt" for="q21o0"><input type="radio" id="q21o0" name="q21" value="0"><span class="lab">A</span><span class="txt">chromium has the highest ionisation enthalpy of the series</span><span class="tag"></span></label><label class="opt" for="q21o1"><input type="radio" id="q21o1" name="q21" value="1"><span class="lab">B</span><span class="txt">Cr<sup>3+</sup> is d<sup>3</sup> with a stable half-filled t<sub>2g</sub> set, so it resists reduction</span><span class="tag"></span></label><label class="opt" for="q21o2"><input type="radio" id="q21o2" name="q21" value="2"><span class="lab">C</span><span class="txt">Cr<sup>2+</sup> has a half-filled d subshell</span><span class="tag"></span></label><label class="opt" for="q21o3"><input type="radio" id="q21o3" name="q21" value="3"><span class="lab">D</span><span class="txt">Cr<sup>3+</sup> is d<sup>5</sup></span><span class="tag"></span></label></div><div class="expl hide" id="e21"><span class="lab">Explanation</span>This is the mirror image of item 21. There the ion was reduced to reach a stable configuration; here the stable configuration is the <b>oxidised</b> form, so Cr<sup>2+</sup> gives an electron away to reach it.<span class="srcline">Source &middot; Note 22</span></div></section>
+<section class="qcard" id="c22"><div class="qhead"><span class="qno">Q23</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v22"></span><span class="qmk">1 mark</span></div><div class="qtext">Most transition metal compounds are coloured, both as solids and in solution, because of:</div><div class="opts"><label class="opt" for="q22o0"><input type="radio" id="q22o0" name="q22" value="0"><span class="lab">A</span><span class="txt">the large size of the metal ion</span><span class="tag"></span></label><label class="opt" for="q22o1"><input type="radio" id="q22o1" name="q22" value="1"><span class="lab">B</span><span class="txt">the high enthalpy of atomisation of the metal</span><span class="tag"></span></label><label class="opt" for="q22o2"><input type="radio" id="q22o2" name="q22" value="2"><span class="lab">C</span><span class="txt">d&ndash;d transitions, in which an electron is promoted between the split d levels</span><span class="tag"></span></label><label class="opt" for="q22o3"><input type="radio" id="q22o3" name="q22" value="3"><span class="lab">D</span><span class="txt">transitions of electrons between different shells</span><span class="tag"></span></label></div><div class="expl hide" id="e22"><span class="lab">Explanation</span>A ligand field splits the five d orbitals into two sets a small energy apart. That gap happens to match visible light, so an electron can absorb a photon and jump, and the compound shows the colour <b>complementary</b> to the light absorbed.<span class="srcline">Source &middot; Note 23</span></div></section>
+<section class="qcard" id="c23"><div class="qhead"><span class="qno">Q24</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v23"></span><span class="qmk">1 mark</span></div><div class="qtext">Sc<sup>3+</sup> and Ti<sup>4+</sup> are colourless because:</div><div class="opts"><label class="opt" for="q23o0"><input type="radio" id="q23o0" name="q23" value="0"><span class="lab">A</span><span class="txt">they are d<sup>10</sup>, so there is no vacancy to promote into</span><span class="tag"></span></label><label class="opt" for="q23o1"><input type="radio" id="q23o1" name="q23" value="1"><span class="lab">B</span><span class="txt">they are too small to absorb visible light</span><span class="tag"></span></label><label class="opt" for="q23o2"><input type="radio" id="q23o2" name="q23" value="2"><span class="lab">C</span><span class="txt">they are diamagnetic</span><span class="tag"></span></label><label class="opt" for="q23o3"><input type="radio" id="q23o3" name="q23" value="3"><span class="lab">D</span><span class="txt">they are d<sup>0</sup>, so there is no d electron to promote</span><span class="tag"></span></label></div><div class="expl hide" id="e23"><span class="lab">Explanation</span>A d&ndash;d transition needs an electron in the lower set <b>and</b> a vacancy in the upper set. These two ions have no d electrons at all, so nothing can be promoted and nothing in the visible region is absorbed.<span class="srcline">Source &middot; Note 24</span></div></section>
+<section class="qcard" id="c24"><div class="qhead"><span class="qno">Q25</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v24"></span><span class="qmk">1 mark</span></div><div class="qtext">Zn<sup>2+</sup> and Cu<sup>+</sup> are colourless because:</div><div class="opts"><label class="opt" for="q24o0"><input type="radio" id="q24o0" name="q24" value="0"><span class="lab">A</span><span class="txt">they are d<sup>10</sup>, so there is no vacancy to promote an electron into</span><span class="tag"></span></label><label class="opt" for="q24o1"><input type="radio" id="q24o1" name="q24" value="1"><span class="lab">B</span><span class="txt">they are d<sup>0</sup>, so there is no electron to promote</span><span class="tag"></span></label><label class="opt" for="q24o2"><input type="radio" id="q24o2" name="q24" value="2"><span class="lab">C</span><span class="txt">they have unpaired electrons</span><span class="tag"></span></label><label class="opt" for="q24o3"><input type="radio" id="q24o3" name="q24" value="3"><span class="lab">D</span><span class="txt">they do not form complexes</span><span class="tag"></span></label></div><div class="expl hide" id="e24"><span class="lab">Explanation</span>The opposite case to item 24, with the same consequence. The d subshell is completely full, so although there are plenty of d electrons there is nowhere for one to go. <b>Both d<sup>0</sup> and d<sup>10</sup> ions are colourless.</b><span class="srcline">Source &middot; Note 25</span></div></section>
+<section class="qcard" id="c25"><div class="qhead"><span class="qno">Q26</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v25"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals and their ions are usually paramagnetic because:</div><div class="opts"><label class="opt" for="q25o0"><input type="radio" id="q25o0" name="q25" value="0"><span class="lab">A</span><span class="txt">they form interstitial compounds</span><span class="tag"></span></label><label class="opt" for="q25o1"><input type="radio" id="q25o1" name="q25" value="1"><span class="lab">B</span><span class="txt">they have unpaired d electrons, typically d<sup>1</sup> to d<sup>9</sup></span><span class="tag"></span></label><label class="opt" for="q25o2"><input type="radio" id="q25o2" name="q25" value="2"><span class="lab">C</span><span class="txt">they have completely filled d orbitals</span><span class="tag"></span></label><label class="opt" for="q25o3"><input type="radio" id="q25o3" name="q25" value="3"><span class="lab">D</span><span class="txt">they have large atomic radii</span><span class="tag"></span></label></div><div class="expl hide" id="e25"><span class="lab">Explanation</span>Paramagnetism comes from unpaired electron spins. The magnetic moment is &radic;<span style="border-top:1px solid">n(n+2)</span> BM, with n the number of unpaired electrons &mdash; so a d<sup>0</sup> or d<sup>10</sup> ion is diamagnetic.<span class="srcline">Source &middot; Note 26</span></div></section>
+<section class="qcard" id="c26"><div class="qhead"><span class="qno">Q27</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v26"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals form a very large number of complexes. Which set of reasons is correct?</div><div class="opts"><label class="opt" for="q26o0"><input type="radio" id="q26o0" name="q26" value="0"><span class="lab">A</span><span class="txt">large ionic radii and a single fixed oxidation state</span><span class="tag"></span></label><label class="opt" for="q26o1"><input type="radio" id="q26o1" name="q26" value="1"><span class="lab">B</span><span class="txt">low ionisation enthalpy and the absence of d orbitals</span><span class="tag"></span></label><label class="opt" for="q26o2"><input type="radio" id="q26o2" name="q26" value="2"><span class="lab">C</span><span class="txt">a high charge-to-size ratio, vacant d orbitals able to accept lone pairs, and variable oxidation states</span><span class="tag"></span></label><label class="opt" for="q26o3"><input type="radio" id="q26o3" name="q26" value="3"><span class="lab">D</span><span class="txt">a low charge-to-size ratio and completely filled d orbitals</span><span class="tag"></span></label></div><div class="expl hide" id="e26"><span class="lab">Explanation</span>All three matter. A small, highly charged ion polarises and attracts ligands strongly; the empty d orbitals of the right energy accept the donated lone pairs; and because the metal has several oxidation states it can do this in more than one form.<span class="srcline">Source &middot; Note 27</span></div></section>
+<section class="qcard" id="c27"><div class="qhead"><span class="qno">Q28</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v27"></span><span class="qmk">1 mark</span></div><div class="qtext">An <b>interstitial compound</b> is one in which:</div><div class="opts"><label class="opt" for="q27o0"><input type="radio" id="q27o0" name="q27" value="0"><span class="lab">A</span><span class="txt">the metal atoms occupy the spaces in a non-metal lattice</span><span class="tag"></span></label><label class="opt" for="q27o1"><input type="radio" id="q27o1" name="q27" value="1"><span class="lab">B</span><span class="txt">two metals of similar radii replace one another in the lattice</span><span class="tag"></span></label><label class="opt" for="q27o2"><input type="radio" id="q27o2" name="q27" value="2"><span class="lab">C</span><span class="txt">the metal is bonded covalently to a small non-metal</span><span class="tag"></span></label><label class="opt" for="q27o3"><input type="radio" id="q27o3" name="q27" value="3"><span class="lab">D</span><span class="txt">small atoms such as H, B, C or N occupy the spaces between the metal atoms in the lattice</span><span class="tag"></span></label></div><div class="expl hide" id="e27"><span class="lab">Explanation</span>They are not stoichiometric compounds in the ordinary sense: the formulae are often non-integral, such as TiC or Fe<sub>3</sub>H, because the small atoms simply fill holes that happen to be available.<span class="srcline">Source &middot; Note 28</span></div></section>
+<section class="qcard" id="c28"><div class="qhead"><span class="qno">Q29</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v28"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals form interstitial compounds readily because:</div><div class="opts"><label class="opt" for="q28o0"><input type="radio" id="q28o0" name="q28" value="0"><span class="lab">A</span><span class="txt">their lattices contain interstitial spaces large enough to take small atoms</span><span class="tag"></span></label><label class="opt" for="q28o1"><input type="radio" id="q28o1" name="q28" value="1"><span class="lab">B</span><span class="txt">they have completely filled d orbitals</span><span class="tag"></span></label><label class="opt" for="q28o2"><input type="radio" id="q28o2" name="q28" value="2"><span class="lab">C</span><span class="txt">they have very low melting points</span><span class="tag"></span></label><label class="opt" for="q28o3"><input type="radio" id="q28o3" name="q28" value="3"><span class="lab">D</span><span class="txt">they are all soft metals</span><span class="tag"></span></label></div><div class="expl hide" id="e28"><span class="lab">Explanation</span>The close-packed metal lattice leaves octahedral and tetrahedral holes. Atoms as small as hydrogen, carbon or nitrogen fit into them without disturbing the structure.<span class="srcline">Source &middot; Note 29</span></div></section>
+<section class="qcard" id="c29"><div class="qhead"><span class="qno">Q30</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v29"></span><span class="qmk">1 mark</span></div><div class="qtext">Why are interstitial compounds more useful than the pure metals?</div><div class="opts"><label class="opt" for="q29o0"><input type="radio" id="q29o0" name="q29" value="0"><span class="lab">A</span><span class="txt">they are chemically far more reactive than the pure metal</span><span class="tag"></span></label><label class="opt" for="q29o1"><input type="radio" id="q29o1" name="q29" value="1"><span class="lab">B</span><span class="txt">they are harder and melt higher, yet keep metallic conductivity and are chemically inert</span><span class="tag"></span></label><label class="opt" for="q29o2"><input type="radio" id="q29o2" name="q29" value="2"><span class="lab">C</span><span class="txt">they are softer and melt lower, which makes them easier to work</span><span class="tag"></span></label><label class="opt" for="q29o3"><input type="radio" id="q29o3" name="q29" value="3"><span class="lab">D</span><span class="txt">they lose metallic conductivity and become insulators</span><span class="tag"></span></label></div><div class="expl hide" id="e29"><span class="lab">Explanation</span>The trapped atoms key the layers together so they cannot slide, which is what makes the material hard and raises the melting point. Steel is the everyday example &mdash; carbon in an iron lattice.<span class="srcline">Source &middot; Note 30</span></div></section>
+<section class="qcard" id="c30"><div class="qhead"><span class="qno">Q31</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v30"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals and their compounds are widely used as catalysts because of:</div><div class="opts"><label class="opt" for="q30o0"><input type="radio" id="q30o0" name="q30" value="0"><span class="lab">A</span><span class="txt">their inability to change oxidation state</span><span class="tag"></span></label><label class="opt" for="q30o1"><input type="radio" id="q30o1" name="q30" value="1"><span class="lab">B</span><span class="txt">their very low melting points</span><span class="tag"></span></label><label class="opt" for="q30o2"><input type="radio" id="q30o2" name="q30" value="2"><span class="lab">C</span><span class="txt">a large surface area, variable oxidation states and vacant d orbitals able to adsorb reactants</span><span class="tag"></span></label><label class="opt" for="q30o3"><input type="radio" id="q30o3" name="q30" value="3"><span class="lab">D</span><span class="txt">their completely filled d orbitals</span><span class="tag"></span></label></div><div class="expl hide" id="e30"><span class="lab">Explanation</span>Two mechanisms, and the reasons cover both. In <b>heterogeneous</b> catalysis the reactants are adsorbed on the surface using the vacant d orbitals, which weakens their bonds; in <b>homogeneous</b> catalysis the metal shuttles between oxidation states, as iron does in the reaction of iodide with persulphate.<span class="srcline">Source &middot; Note 31</span></div></section>
+<section class="qcard" id="c31"><div class="qhead"><span class="qno">Q32</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v31"></span><span class="qmk">1 mark</span></div><div class="qtext">Transition metals form alloys with one another very readily because:</div><div class="opts"><label class="opt" for="q31o0"><input type="radio" id="q31o0" name="q31" value="0"><span class="lab">A</span><span class="txt">their metallic radii differ widely</span><span class="tag"></span></label><label class="opt" for="q31o1"><input type="radio" id="q31o1" name="q31" value="1"><span class="lab">B</span><span class="txt">they all have the same oxidation state</span><span class="tag"></span></label><label class="opt" for="q31o2"><input type="radio" id="q31o2" name="q31" value="2"><span class="lab">C</span><span class="txt">they all have completely filled d orbitals</span><span class="tag"></span></label><label class="opt" for="q31o3"><input type="radio" id="q31o3" name="q31" value="3"><span class="lab">D</span><span class="txt">their metallic radii are very similar, so one can replace another in the lattice</span><span class="tag"></span></label></div><div class="expl hide" id="e31"><span class="lab">Explanation</span>Alloys of this kind are <b>substitutional</b>: one metal atom simply takes the place of another. That needs the two radii to be close, which across the d block they are. Contrast the interstitial compounds of items 28&ndash;30, where the added atom is much smaller and goes into a hole.<span class="srcline">Source &middot; Note 32</span></div></section>
+<section class="qcard" id="c32"><div class="qhead"><span class="qno">Q33</span><span class="qch">Colour, magnetism and characteristic properties</span><span class="verdict hide" id="v32"></span><span class="qmk">1 mark</span></div><div class="qtext">Oxides of transition metals in high oxidation states are acidic while those in low oxidation states are basic. Why?</div><div class="opts"><label class="opt" for="q32o0"><input type="radio" id="q32o0" name="q32" value="0"><span class="lab">A</span><span class="txt">a metal in a high oxidation state is small and highly charged, so it polarises the oxide ion strongly and the oxide becomes covalent and acidic</span><span class="tag"></span></label><label class="opt" for="q32o1"><input type="radio" id="q32o1" name="q32" value="1"><span class="lab">B</span><span class="txt">high oxidation states make the oxide more ionic</span><span class="tag"></span></label><label class="opt" for="q32o2"><input type="radio" id="q32o2" name="q32" value="2"><span class="lab">C</span><span class="txt">low oxidation states give the metal a greater polarising power</span><span class="tag"></span></label><label class="opt" for="q32o3"><input type="radio" id="q32o3" name="q32" value="3"><span class="lab">D</span><span class="txt">the oxidation state does not affect the metal&rsquo;s polarising power</span><span class="tag"></span></label></div><div class="expl hide" id="e32"><span class="lab">Explanation</span>Compare the chromium oxides: CrO is basic, Cr<sub>2</sub>O<sub>3</sub> amphoteric and CrO<sub>3</sub> acidic. The rising charge concentrates on a shrinking ion, pulls the oxide electron cloud towards itself and makes the bond covalent &mdash; and covalent oxides are acidic.<span class="srcline">Source &middot; Note 33</span></div></section>
+<section class="qcard" id="c33"><div class="qhead"><span class="qno">Q34</span><span class="qch">The f-block: lanthanoids and actinoids</span><span class="verdict hide" id="v33"></span><span class="qmk">1 mark</span></div><div class="qtext">Actinoids show a greater number of oxidation states than the lanthanoids because:</div><div class="opts"><label class="opt" for="q33o0"><input type="radio" id="q33o0" name="q33" value="0"><span class="lab">A</span><span class="txt">the actinoids are larger than the lanthanoids</span><span class="tag"></span></label><label class="opt" for="q33o1"><input type="radio" id="q33o1" name="q33" value="1"><span class="lab">B</span><span class="txt">the 5f, 6d and 7s orbitals are of comparable energy, so all three sets of electrons are available</span><span class="tag"></span></label><label class="opt" for="q33o2"><input type="radio" id="q33o2" name="q33" value="2"><span class="lab">C</span><span class="txt">the 5f electrons are very tightly held by the nucleus</span><span class="tag"></span></label><label class="opt" for="q33o3"><input type="radio" id="q33o3" name="q33" value="3"><span class="lab">D</span><span class="txt">the actinoids are all radioactive</span><span class="tag"></span></label></div><div class="expl hide" id="e33"><span class="lab">Explanation</span>In the lanthanoids the 4f electrons are buried and take almost no part in bonding, so +3 dominates. In the actinoids 5f, 6d and 7s lie close together, so oxidation states from +3 up to +7 are known &mdash; uranium alone shows +3, +4, +5 and +6.<span class="srcline">Source &middot; Note 34</span></div></section>
+<section class="qcard" id="c34"><div class="qhead"><span class="qno">Q35</span><span class="qch">The f-block: lanthanoids and actinoids</span><span class="verdict hide" id="v34"></span><span class="qmk">1 mark</span></div><div class="qtext">The chemistry of the actinoids is difficult to study because:</div><div class="opts"><label class="opt" for="q34o0"><input type="radio" id="q34o0" name="q34" value="0"><span class="lab">A</span><span class="txt">they form no compounds</span><span class="tag"></span></label><label class="opt" for="q34o1"><input type="radio" id="q34o1" name="q34" value="1"><span class="lab">B</span><span class="txt">they are the most abundant elements in the earth&rsquo;s crust</span><span class="tag"></span></label><label class="opt" for="q34o2"><input type="radio" id="q34o2" name="q34" value="2"><span class="lab">C</span><span class="txt">they are radioactive and many have very short half-lives</span><span class="tag"></span></label><label class="opt" for="q34o3"><input type="radio" id="q34o3" name="q34" value="3"><span class="lab">D</span><span class="txt">they are all gases at room temperature</span><span class="tag"></span></label></div><div class="expl hide" id="e34"><span class="lab">Explanation</span>Beyond uranium the elements are synthetic and are made in minute quantities; the short half-lives mean the sample is decaying while it is being worked on, and the radioactivity itself makes handling hazardous.<span class="srcline">Source &middot; Note 35</span></div></section>
+<section class="qcard" id="c35"><div class="qhead"><span class="qno">Q36</span><span class="qch">The f-block: lanthanoids and actinoids</span><span class="verdict hide" id="v35"></span><span class="qmk">1 mark</span></div><div class="qtext">Ce(IV) is a good oxidising agent in aqueous solution because:</div><div class="opts"><label class="opt" for="q35o0"><input type="radio" id="q35o0" name="q35" value="0"><span class="lab">A</span><span class="txt">E&deg;(Ce<sup>4+</sup>/Ce<sup>3+</sup>) is strongly negative</span><span class="tag"></span></label><label class="opt" for="q35o1"><input type="radio" id="q35o1" name="q35" value="1"><span class="lab">B</span><span class="txt">Ce<sup>4+</sup> has a half-filled f subshell</span><span class="tag"></span></label><label class="opt" for="q35o2"><input type="radio" id="q35o2" name="q35" value="2"><span class="lab">C</span><span class="txt">cerium is radioactive</span><span class="tag"></span></label><label class="opt" for="q35o3"><input type="radio" id="q35o3" name="q35" value="3"><span class="lab">D</span><span class="txt">E&deg;(Ce<sup>4+</sup>/Ce<sup>3+</sup>) is +1&middot;74 V, so the reduction to the common +3 state is strongly favourable</span><span class="tag"></span></label></div><div class="expl hide" id="e35"><span class="lab">Explanation</span>+3 is the normal oxidation state across the lanthanoids, so a lanthanoid forced into +4 reverts to it readily. The large positive potential is what makes ceric ammonium sulphate a standard oxidising agent in volumetric analysis.<span class="srcline">Source &middot; Note 36</span></div></section>
+<section class="qcard" id="c36"><div class="qhead"><span class="qno">Q37</span><span class="qch">The f-block: lanthanoids and actinoids</span><span class="verdict hide" id="v36"></span><span class="qmk">1 mark</span></div><div class="qtext">Actinoid contraction is greater, element for element, than lanthanoid contraction because:</div><div class="opts"><label class="opt" for="q36o0"><input type="radio" id="q36o0" name="q36" value="0"><span class="lab">A</span><span class="txt">the 5f orbitals shield the nuclear charge even more poorly than the 4f orbitals do</span><span class="tag"></span></label><label class="opt" for="q36o1"><input type="radio" id="q36o1" name="q36" value="1"><span class="lab">B</span><span class="txt">the 5f orbitals shield the nuclear charge better than the 4f orbitals do</span><span class="tag"></span></label><label class="opt" for="q36o2"><input type="radio" id="q36o2" name="q36" value="2"><span class="lab">C</span><span class="txt">the actinoids have a smaller nuclear charge</span><span class="tag"></span></label><label class="opt" for="q36o3"><input type="radio" id="q36o3" name="q36" value="3"><span class="lab">D</span><span class="txt">the actinoids have no f electrons</span><span class="tag"></span></label></div><div class="expl hide" id="e36"><span class="lab">Explanation</span>Both contractions have the same cause &mdash; f electrons are poor at screening, so the effective nuclear charge felt by the outer electrons climbs steadily. The 5f orbitals extend further out and screen even worse than the 4f, so each step shrinks the atom more.<span class="srcline">Source &middot; Note 37</span></div></section>
+</div>
+
+</div>
+
+<footer class="foot"><div class="rule"></div>
+  <p>Questions are set to the standard of Section A of the ISC Chemistry Paper 1
+  board and CISCE specimen papers &mdash; a mixture of quick numericals, applied
+  concepts and the recall items the board sets at one mark.</p>
+</footer>
+<script>
+(function(){
+  var KEY = 'isc-chem-dfblock-v1';
+  var MINUTES = 60, MARKS = 1, N = 37;
+  var ANS = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0];          // correct option index per question
+  var CH  = ["gen", "gen", "gen", "gen", "gen", "gen", "gen", "gen", "gen", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "ox", "prop", "prop", "prop", "prop", "prop", "prop", "prop", "prop", "prop", "prop", "prop", "f", "f", "f", "f"];           // chapter key per question
+  var CHN = {"gen": "Why they are transition elements", "ox": "Oxidation states and electrode potentials", "prop": "Colour, magnetism and characteristic properties", "f": "The f-block: lanthanoids and actinoids"};          // chapter key -> printed name
+  var LETTERS = ['A','B','C','D'];
+
+  var gate = document.getElementById('gate');
+  var paper = document.getElementById('paper');
+  var result = document.getElementById('result');
+  var qs = document.getElementById('questions');
+  var clockEl = document.getElementById('clock');
+  var answeredEl = document.getElementById('answered');
+  var tick = null, warned = false;
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+    catch(e){ return null; }
+  }
+  function save(s){
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e){}
+  }
+  function clear(){ try { localStorage.removeItem(KEY); } catch(e){} }
+
+  /* ------------------------------------------------ starting */
+  function start(){
+    var s = { state:'running', endAt: Date.now() + MINUTES*60*1000, answers:{} };
+    save(s);
+    show(s);
+  }
+
+  function show(s){
+    if (!s) { gate.classList.remove('hide'); paper.classList.add('hide');
+              result.classList.add('hide'); qs.classList.add('hide'); return; }
+    if (s.state === 'submitted') { render(s); return; }
+    gate.classList.add('hide'); result.classList.add('hide');
+    paper.classList.remove('hide'); qs.classList.remove('hide');
+    restore(s);
+    armGuards();
+    tick = setInterval(clockTick, 250);
+    clockTick();
+  }
+
+  function restore(s){
+    for (var i = 0; i < N; i++){
+      var pick = s.answers[i];
+      if (pick === undefined) continue;
+      var input = document.getElementById('q'+i+'o'+pick);
+      if (input){ input.checked = true; input.closest('.opt').classList.add('sel'); }
+    }
+    countAnswered(s);
+  }
+
+  function countAnswered(s){
+    var n = Object.keys(s.answers).length;
+    answeredEl.textContent = n + ' of ' + N + ' answered';
+  }
+
+  /* ------------------------------------------------ the clock */
+  /* The deadline is read from storage on every tick rather than captured once,
+     so the clock always reflects the stored attempt -- and stops if the attempt
+     was finalised elsewhere (another tab, or the load-path recovery). */
+  function clockTick(){
+    var s = load();
+    if (!s || s.state !== 'running'){
+      if (tick) { clearInterval(tick); tick = null; }
+      return;
+    }
+    var left = Math.max(0, s.endAt - Date.now());
+    var m = Math.floor(left/60000), sec = Math.floor((left%60000)/1000);
+    clockEl.textContent = (m<10?'0':'') + m + ':' + (sec<10?'0':'') + sec;
+    clockEl.className = left <= 120000 ? 'crit' : (left <= 600000 ? 'warn' : '');
+    if (left <= 0) submit('time');
+  }
+
+  /* ------------------------------------- leaving the paper */
+  function armGuards(){
+    window.addEventListener('beforeunload', onBeforeUnload);
+    document.addEventListener('visibilitychange', persist);
+    window.addEventListener('pagehide', persist);
+  }
+  function disarmGuards(){
+    window.removeEventListener('beforeunload', onBeforeUnload);
+    document.removeEventListener('visibilitychange', persist);
+    window.removeEventListener('pagehide', persist);
+  }
+  function onBeforeUnload(e){
+    var s = load();
+    if (!s || s.state !== 'running') return;
+    persist();
+    e.preventDefault();
+    e.returnValue = '';        /* required by older browsers to raise the dialog */
+    return '';
+  }
+  /* Write the answers out whenever the page might be going away. This does NOT
+     submit: the submission is finalised on the next load, because pagehide and
+     beforeunload are both unreliable (mobile in particular) whereas the load path
+     always runs. */
+  function persist(){
+    var s = load();
+    if (!s || s.state !== 'running') return;
+    s.answers = collect();
+    s.leftAt = Date.now();
+    save(s);
+  }
+
+  function collect(){
+    var out = {};
+    for (var i = 0; i < N; i++){
+      var el = document.querySelector('input[name="q'+i+'"]:checked');
+      if (el) out[i] = parseInt(el.value, 10);
+    }
+    return out;
+  }
+
+  /* ------------------------------------------------ submitting */
+  function submit(reason){
+    var s = load();
+    if (!s || s.state !== 'running') return;
+    if (tick) { clearInterval(tick); tick = null; }
+    disarmGuards();
+    s.answers = (reason === 'left') ? (s.answers || {}) : collect();
+    s.state = 'submitted';
+    s.submittedAt = Date.now();
+    s.reason = reason;
+    save(s);
+    render(s);
+  }
+
+  /* ------------------------------------------------ the marked paper */
+  function render(s){
+    gate.classList.add('hide');
+    paper.classList.add('hide');
+    result.classList.remove('hide');
+    qs.classList.remove('hide');
+
+    var got = 0, right = 0, wrong = 0, blank = 0;
+    var per = {};
+    for (var k in CHN) per[k] = {n:0, r:0};
+
+    for (var i = 0; i < N; i++){
+      var pick = s.answers[i];
+      var ok = (pick === ANS[i]);
+      per[CH[i]].n++;
+      if (pick === undefined) blank++;
+      else if (ok) { right++; got += MARKS; per[CH[i]].r++; }
+      else wrong++;
+
+      var card = document.getElementById('c'+i);
+      card.className = 'qcard ' + (pick === undefined ? 'blank' : (ok ? 'right':'wrong'));
+      var v = document.getElementById('v'+i);
+      v.className = 'verdict ' + (pick === undefined ? 'bl' : (ok ? 'ok':'no'));
+      v.textContent = pick === undefined ? 'Not attempted'
+                    : (ok ? '+' + MARKS + ' mark' : '0 marks');
+      v.classList.remove('hide');
+
+      for (var j = 0; j < 4; j++){
+        var o = document.getElementById('q'+i+'o'+j);
+        var row = o.closest('.opt');
+        o.disabled = true;
+        row.classList.remove('sel');
+        var tag = row.querySelector('.tag');
+        if (j === ANS[i]) { row.classList.add('correct'); tag.textContent = 'Correct answer'; }
+        if (pick === j && j !== ANS[i]) {
+          row.classList.add('chosen-wrong'); tag.textContent = 'Your answer';
+        }
+        if (pick === j && j === ANS[i]) { tag.textContent = 'Your answer — correct'; }
+      }
+      document.getElementById('e'+i).classList.remove('hide');
+    }
+
+    document.getElementById('score').innerHTML =
+      got + '<span> / ' + (N*MARKS) + '</span>';
+    document.getElementById('pct').textContent =
+      Math.round(got/(N*MARKS)*1000)/10 + '%  ·  ' + right + ' correct, ' +
+      wrong + ' wrong, ' + blank + ' not attempted';
+
+    var why = document.getElementById('why');
+    if (s.reason === 'time') {
+      why.innerHTML = '<b>Time was up.</b> The paper submitted itself at the end of ' +
+        'the ' + MINUTES + ' minutes.';
+      why.classList.remove('hide');
+    } else if (s.reason === 'left') {
+      why.innerHTML = '<b>You left the paper.</b> Closing, reloading or navigating ' +
+        'away from a paper in progress submits it, so this was marked with the ' +
+        'answers you had given at that point.';
+      why.classList.remove('hide');
+    } else { why.classList.add('hide'); }
+
+    var rows = '';
+    for (var key in CHN){
+      rows += '<tr><td class="l">' + CHN[key] + '</td><td>' + per[key].r + ' / ' +
+              per[key].n + '</td><td>' + (per[key].r*MARKS) + ' / ' +
+              (per[key].n*MARKS) + '</td></tr>';
+    }
+    document.getElementById('brkbody').innerHTML = rows;
+    document.getElementById('brkfoot').innerHTML =
+      '<tr><td class="l">Total</td><td>' + right + ' / ' + N + '</td><td>' +
+      got + ' / ' + (N*MARKS) + '</td></tr>';
+    window.scrollTo(0,0);
+  }
+
+  /* ------------------------------------------------ wiring */
+  document.getElementById('startbtn').addEventListener('click', start);
+
+  document.getElementById('submitbtn').addEventListener('click', function(){
+    var a = collect(), n = Object.keys(a).length;
+    if (n < N && !confirm((N-n) + ' question' + (N-n===1?' is':'s are') +
+        ' still unanswered. Submit anyway?')) return;
+    submit('manual');
+  });
+
+  document.querySelectorAll('.opt input').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      var s = load();
+      if (!s || s.state !== 'running') return;
+      inp.closest('.opts').querySelectorAll('.opt')
+         .forEach(function(o){ o.classList.remove('sel'); });
+      inp.closest('.opt').classList.add('sel');
+      s.answers = collect();
+      save(s);
+      countAnswered(s);
+    });
+  });
+
+  var again = document.getElementById('again');
+  if (again) again.addEventListener('click', function(){
+    if (!confirm('Clear this attempt and start the paper again from the beginning?'))
+      return;
+    clear();
+    location.reload();
+  });
+
+  /* ---- the load path, which is where a lock-in is actually enforced ---- */
+  var s0 = load();
+  if (s0 && s0.state === 'running'){
+    /* The student closed, reloaded or navigated away without submitting. Finalise
+       now with whatever was stored, and say which of the two reasons it was. */
+    var expired = Date.now() >= s0.endAt;
+    s0.state = 'submitted';
+    s0.submittedAt = Date.now();
+    s0.reason = expired ? 'time' : 'left';
+    save(s0);
+    render(s0);
+  } else {
+    show(s0);
+  }
+})();
+</script>
